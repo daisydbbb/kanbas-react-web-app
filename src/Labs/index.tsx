@@ -7,9 +7,10 @@ import Lab3 from "./Lab3";
 export default function Labs() {
   return (
     <div id="wd-labs">
-      <h1>Labs</h1>
-      <h2>Xin Ding</h2>
+      <h1>Xin Ding</h1>
       <a href="https://github.com/daisydbbb/kanbas-react-web-app">GitHub</a>
+      <h1>Labs</h1>
+
       <TOC />
       <Routes>
         <Route path="/" element={<Navigate to="Lab1" />} />

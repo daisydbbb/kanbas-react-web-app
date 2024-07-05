@@ -102,22 +102,26 @@ export default function AssignmentEditor() {
             <br />
             <br />
 
-            <div>
-              <label htmlFor="wd-available-from">Available from </label>
-              {"   "}
-              <label htmlFor="wd-available-until">Until</label>
-              <br />
-              <input type="date" id="wd-available-from" value="2024-05-06" />
-              {"   "}
-              <input type="date" id="wd-available-until" value="2024-05-20" />
+            <div className="availabe-time-container">
+              <div>
+                <label htmlFor="wd-available-from">Available from </label>
+                <br />
+                <input type="date" id="wd-available-from" value="2024-05-06" />
+              </div>
+              <div>
+                <label htmlFor="wd-available-until">Until</label>
+                <br />
+                <input type="date" id="wd-available-until" value="2024-05-20" />
+              </div>
             </div>
-
-            <br />
           </td>
         </tr>
       </table>
       <hr />
-      <button>Cancel</button> <button>Save</button>
+      <div className="button-container">
+        <button className="button-right-align">Cancel</button>
+        <button className="button-right-align">Save</button>
+      </div>
     </div>
   );
 }
