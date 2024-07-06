@@ -2,7 +2,7 @@ export default function Dashboard() {
   return (
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-      <h2 id="wd-dashboard-published">Published Courses (7)</h2> <hr />
+      <h2 id="wd-dashboard-published">Published Courses (8)</h2> <hr />
       <div id="wd-dashboard-courses">
         <div className="wd-dashboard-course">
           <img src="/images/reactjs.jpg" width={200} alt="reactjs" />
@@ -82,6 +82,23 @@ export default function Dashboard() {
               Gain skills in both frontend and backend development
             </p>
             <a href="#/Kanbas/Courses/2204/Home"> Go </a>
+          </div>
+        </div>
+        <br></br>
+
+        <div className="wd-dashboard-course">
+          <img src="/images/database.jpg" width={200} alt="database" />
+          <div>
+            <a
+              className="wd-dashboard-course-link"
+              href="#/Kanbas/Courses/2301/Home"
+            >
+              CS2301 Database Management
+            </a>
+            <p className="wd-dashboard-course-title">
+              Learn about building and managing database
+            </p>
+            <a href="#/Kanbas/Courses/2301/Home"> Go </a>
           </div>
         </div>
         <br></br>
