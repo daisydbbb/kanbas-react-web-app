@@ -66,19 +66,39 @@ export default function AssignmentEditor() {
             <br />
             <div>
               Online Entry Options <br />
-              <input type="checkbox" id="wd-text-entry" />
+              <input
+                type="checkbox"
+                name="online-entry-options"
+                id="wd-text-entry"
+              />
               <label htmlFor="wd-text-entry">Text Entry</label>
               <br />
-              <input type="checkbox" id="wd-website-url" />
+              <input
+                type="checkbox"
+                name="online-entry-options"
+                id="wd-website-url"
+              />
               <label htmlFor="wd-website-url">Website URL</label>
               <br />
-              <input type="checkbox" id="wd-media-recordings" />
+              <input
+                type="checkbox"
+                name="online-entry-options"
+                id="wd-media-recordings"
+              />
               <label htmlFor="wd-media-recordings">Media Recordings</label>
               <br />
-              <input type="checkbox" id="wd-student-annotation" />
+              <input
+                type="checkbox"
+                name="online-entry-options"
+                id="wd-student-annotation"
+              />
               <label htmlFor="wd-student-annotation">Student Annotation</label>
               <br />
-              <input type="checkbox" id="wd-file-upload" />
+              <input
+                type="checkbox"
+                name="online-entry-options"
+                id="wd-file-upload"
+              />
               <label htmlFor="wd-file-upload">File Uploads</label>
               <br />
             </div>
@@ -93,12 +113,12 @@ export default function AssignmentEditor() {
           <td>
             <label htmlFor="wd-assign-to">Assign to</label>
             <br />
-            <input type="text" id="wd-assign-to" value="Everyone" />
+            <input type="text" id="wd-assign-to" defaultValue="Everyone" />
             <br />
             <br />
             <label htmlFor="wd-due-date">Due</label>
             <br />
-            <input type="date" id="wd-due-date" value="2024-05-13" />
+            <input type="date" id="wd-due-date" defaultValue="2024-05-13" />
             <br />
             <br />
 
@@ -106,12 +126,20 @@ export default function AssignmentEditor() {
               <div>
                 <label htmlFor="wd-available-from">Available from </label>
                 <br />
-                <input type="date" id="wd-available-from" value="2024-05-06" />
+                <input
+                  type="date"
+                  id="wd-available-from"
+                  defaultValue="2024-05-06"
+                />
               </div>
               <div>
                 <label htmlFor="wd-available-until">Until</label>
                 <br />
-                <input type="date" id="wd-available-until" value="2024-05-20" />
+                <input
+                  type="date"
+                  id="wd-available-until"
+                  defaultValue="2024-05-20"
+                />
               </div>
             </div>
           </td>

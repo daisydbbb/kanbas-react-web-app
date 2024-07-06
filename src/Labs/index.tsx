@@ -8,7 +8,6 @@ export default function Labs() {
   return (
     <div id="wd-labs">
       <h1>Xin Ding</h1>
-      <a href="https://github.com/daisydbbb/kanbas-react-web-app">GitHub</a>
       <h1>Labs</h1>
 
       <TOC />
