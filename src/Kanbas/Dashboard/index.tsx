@@ -3,139 +3,194 @@ export default function Dashboard() {
     <div id="wd-dashboard">
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
       <h2 id="wd-dashboard-published">Published Courses (8)</h2> <hr />
-      <div id="wd-dashboard-courses">
-        <div className="wd-dashboard-course">
-          <img src="/images/reactjs.jpg" width={200} alt="reactjs" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1234/Home"
-            >
-              CS1234 React JS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Full Stack software developer
-            </p>
-            <a href="#/Kanbas/Courses/1234/Home"> Go </a>
+      <div id="wd-dashboard-courses" className="row">
+        <div className="row row-cols-1 row-cols-md-5 g-4">
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/1234/Home"
+              >
+                <img
+                  src="/images/reactjs.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="reactjs"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1234 React JS
+                  </h5>
+                  <p className="card-text">Full Stack software developer</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-        <br></br>
-        <div className="wd-dashboard-course">
-          <img src="/images/html.jpg" width={200} alt="html" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1101/Home"
-            >
-              CS1101 Introduction to HTML
-            </a>
-            <p className="wd-dashboard-course-title">
-              Learn the foundational languages of web development
-            </p>
-            <a href="#/Kanbas/Courses/1101/Home"> Go </a>
-          </div>
-        </div>
-        <br></br>
-        <div className="wd-dashboard-course">
-          <img src="/images/css.jpg" width={200} alt="css" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1102/Home"
-            >
-              CS1102 Introduction to CSS
-            </a>
-            <p className="wd-dashboard-course-title">
-              Building and styling web pages
-            </p>
-            <a href="#/Kanbas/Courses/1102/Home"> Go </a>
-          </div>
-        </div>
-        <br></br>
-        <div className="wd-dashboard-course">
-          <img src="/images/javascript.jpg" width={200} alt="javascript" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/1123/Home"
-            >
-              CS1123 JavaScript Fundamentals
-            </a>
-            <p className="wd-dashboard-course-title">
-              Explore the basics of JavaScript
-            </p>
-            <a href="#/Kanbas/Courses/1123/Home"> Go </a>
-          </div>
-        </div>
-        <br></br>
 
-        <div className="wd-dashboard-course">
-          <img src="/images/webdev.jpg" width={200} alt="webdev" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/2204/Home"
-            >
-              CS2204 Full Stack Web Development
-            </a>
-            <p className="wd-dashboard-course-title">
-              Gain skills in both frontend and backend development
-            </p>
-            <a href="#/Kanbas/Courses/2204/Home"> Go </a>
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/1101/Home"
+              >
+                <img
+                  src="/images/html.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="html"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1101 HTML
+                  </h5>
+                  <p className="card-text">
+                    Foundational languages of web development
+                  </p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-        <br></br>
 
-        <div className="wd-dashboard-course">
-          <img src="/images/database.jpg" width={200} alt="database" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/2301/Home"
-            >
-              CS2301 Database Management
-            </a>
-            <p className="wd-dashboard-course-title">
-              Learn about building and managing database
-            </p>
-            <a href="#/Kanbas/Courses/2301/Home"> Go </a>
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/1101/Home"
+              >
+                <img
+                  src="/images/css.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="css"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1102 CSS
+                  </h5>
+                  <p className="card-text">Building and styling web pages</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-        <br></br>
 
-        <div className="wd-dashboard-course">
-          <img src="/images/mobile.jpg" width={200} alt="mobile" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/3046/Home"
-            >
-              CS3046 Mobile App Development
-            </a>
-            <p className="wd-dashboard-course-title">
-              Develope mobile-friendly websites and web applications
-            </p>
-            <a href="#/Kanbas/Courses/3046/Home"> Go </a>
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/1101/Home"
+              >
+                <img
+                  src="/images/javascript.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="javascript"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS1123 JavaScript
+                  </h5>
+                  <p className="card-text">Explore the basics of JavaScript</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
           </div>
-        </div>
-        <br></br>
 
-        <div className="wd-dashboard-course">
-          <img src="/images/devops.jpg" width={200} alt="devops" />
-          <div>
-            <a
-              className="wd-dashboard-course-link"
-              href="#/Kanbas/Courses/4088/Home"
-            >
-              CS4088 DevOps for Web Developers
-            </a>
-            <p className="wd-dashboard-course-title">
-              Gain insights into DevOps practices and tools for web development
-            </p>
-            <a href="#/Kanbas/Courses/4088/Home"> Go </a>
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/2204/Home"
+              >
+                <img
+                  src="/images/webdev.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="webdev"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS2204 Full Stack Web Development
+                  </h5>
+                  <p className="card-text">Frontend and backend dev</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/2301/Home"
+              >
+                <img
+                  src="/images/database.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="database"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS2301 Database Management
+                  </h5>
+                  <p className="card-text">Build and manage database</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/3046/Home"
+              >
+                <img
+                  src="/images/mobile.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="mobile"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS3046 Mobile App Development
+                  </h5>
+                  <p className="card-text">Develope mobile applications</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div className="wd-dashboard-course col" style={{ width: "270px" }}>
+            <div className="card fixed-size-card">
+              <a
+                className="wd-dashboard-course-link text-decoration-none text-dark"
+                href="#/Kanbas/Courses/4088/Home"
+              >
+                <img
+                  src="/images/devops.jpg"
+                  width="100%"
+                  height="140px"
+                  alt="devops"
+                />
+                <div className="card-body">
+                  <h5 className="wd-dashboard-course-title card-title">
+                    CS4088 DevOps for Web Developers
+                  </h5>
+                  <p className="card-text">DevOps practices and tools</p>
+                  <button className="btn btn-primary"> Go </button>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
-        <br></br>
       </div>
     </div>
   );

@@ -1,0 +1,32 @@
+.left-green {
+  border-left: 3px solid green !important;
+}
+
+.wd-border-solid {
+  border-color: gray;
+  border-width: 0.5px;
+}
+
+.custom-link {
+  color: inherit; /* Inherit color from parent */
+  text-decoration: none; /* Remove underline */
+}
+
+.form-control.no-border {
+  border: none;
+  box-shadow: none;
+}
+
+.with-border {
+  border: solid;
+  border-color: lightgrey;
+}
+
+.text-padding {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card-padding {
+  padding: 10px;
+}
