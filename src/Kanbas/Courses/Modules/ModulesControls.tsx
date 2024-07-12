@@ -3,15 +3,34 @@ import { IoBan } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
 export default function ModulesControls() {
   return (
-    <div id="wd-modules-controls" className="text-nowrap fs-4 ">
-      <button
-        id="wd-add-module-btn"
-        className="btn btn-lg btn-danger me-4 float-end"
-      >
-        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
-        Module
-      </button>
-      <div className="dropdown d-inline me-1 float-end">
+    <div
+      id="wd-modules-controls"
+      className="d-flex flex-wrap-nowrap justify-content-end align-items-center fs-4"
+      style={{ gap: "8px" }}
+    >
+      <div className="dropdown d-inline">
+        <button
+          id="wd-collapse-all"
+          className="btn btn-lg btn-secondary"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          Collapse All
+        </button>
+      </div>
+
+      <div className="dropdown d-inline">
+        <button
+          id="wd-view-progress"
+          className="btn btn-lg btn-secondary"
+          type="button"
+          data-bs-toggle="dropdown"
+        >
+          View Progress
+        </button>
+      </div>
+
+      <div className="dropdown d-inline">
         <button
           id="wd-publish-all-btn"
           className="btn btn-lg btn-secondary dropdown-toggle "
@@ -40,7 +59,7 @@ export default function ModulesControls() {
               className="dropdown-item"
               href="#"
             >
-              <IoBan />
+              <GreenCheckmark />
               Publish modules only
             </a>
           </li>
@@ -51,7 +70,7 @@ export default function ModulesControls() {
               className="dropdown-item"
               href="#"
             >
-              <IoBan />
+              <IoBan className="me-1 fs-5" />
               Unpublish all modules and items
             </a>
           </li>
@@ -62,32 +81,20 @@ export default function ModulesControls() {
               className="dropdown-item"
               href="#"
             >
-              <GreenCheckmark />
+              <IoBan className="me-1 fs-5" />
               Unpublish modules only
             </a>
           </li>
         </ul>
       </div>
 
-      <div className="dropdown d-inline me-1 float-end">
-        <button
-          id="wd-view-progress"
-          className="btn btn-lg btn-secondary"
-          type="button"
-          data-bs-toggle="dropdown"
-        >
-          View Progress
-        </button>
-      </div>
-
-      <div className="dropdown d-inline me-1 float-end">
-        <button
-          id="wd-collapse-all"
-          className="btn btn-lg btn-secondary"
-          type="button"
-          data-bs-toggle="dropdown"
-        >
-          Collapse All
+      <div>
+        <button id="wd-add-module-btn" className="btn btn-lg btn-danger">
+          <FaPlus
+            className="position-relative me-2"
+            style={{ bottom: "1px" }}
+          />
+          Module
         </button>
       </div>
     </div>

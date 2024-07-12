@@ -25,7 +25,9 @@ export default function Lab2() {
       <h2>Lab 2 - Cascading Style Sheets</h2>
       <h3>Styling with the STYLE attribute</h3>
       <div id="wd-github">
-        <a href="https://github.com/daisydbbb/kanbas-react-web-app">GitHub</a>
+        <a href="https://github.com/daisydbbb/kanbas-react-web-app/tree/a2">
+          GitHub
+        </a>
       </div>
 
       <div id="wd-css-id-selectors">

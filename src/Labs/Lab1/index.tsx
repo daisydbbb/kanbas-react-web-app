@@ -8,7 +8,7 @@ import Anchors from "./Anchors";
 
 export default function Lab1() {
   return (
-    <div id="wd-labs">
+    <div id="wd-labs" className="container">
       <h2>Lab 1</h2>
       <div id="wd-github">
         <a href="https://github.com/daisydbbb/kanbas-react-web-app/tree/a1">

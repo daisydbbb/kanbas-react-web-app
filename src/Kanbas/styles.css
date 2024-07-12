@@ -37,3 +37,7 @@ body * {
   background: none;
   border: none;
 }
+
+.left-green {
+  border-left: 3px solid green !important;
+}

@@ -24,7 +24,8 @@ export default function Assignments() {
             <ul className="wd-assignment-list list-group rounded-0">
               <li className="wd-assignment-list-item list-group-item p-3 ps-1 left-green">
                 <a
-                  className="wd-assignment-link custom-link"
+                  id="wd-assignment-link"
+                  className="text-decoration-none text-dark"
                   href="#/Kanbas/Courses/1234/Assignments/123"
                 >
                   <div className="container">
@@ -56,7 +57,8 @@ export default function Assignments() {
 
               <li className="wd-assignment-list-item list-group-item p-3 ps-1 left-green">
                 <a
-                  className="wd-assignment-link custom-link"
+                  id="wd-assignment-link"
+                  className="text-decoration-none text-dark"
                   href="#/Kanbas/Courses/1234/Assignments/123"
                 >
                   <div className="container">
@@ -87,7 +89,8 @@ export default function Assignments() {
               </li>
               <li className="wd-assignment-list-item list-group-item p-3 ps-1 left-green">
                 <a
-                  className="wd-assignment-link custom-link"
+                  id="wd-assignment-link"
+                  className="text-decoration-none text-dark"
                   href="#/Kanbas/Courses/1234/Assignments/123"
                 >
                   <div className="container">
