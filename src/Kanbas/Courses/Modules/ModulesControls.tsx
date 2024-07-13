@@ -5,36 +5,21 @@ export default function ModulesControls() {
   return (
     <div
       id="wd-modules-controls"
-      className="d-flex flex-wrap-nowrap justify-content-end align-items-center fs-4"
+      className="d-flex flex-wrap-nowrap justify-content-end align-items-center"
       style={{ gap: "8px" }}
     >
-      <div className="dropdown d-inline">
-        <button
-          id="wd-collapse-all"
-          className="btn btn-lg btn-secondary"
-          type="button"
-          data-bs-toggle="dropdown"
-        >
-          Collapse All
-        </button>
-      </div>
+      <button id="wd-collapse-all-btn" className="btn btn-lg btn-secondary">
+        Collapse All
+      </button>
 
-      <div className="dropdown d-inline">
-        <button
-          id="wd-view-progress"
-          className="btn btn-lg btn-secondary"
-          type="button"
-          data-bs-toggle="dropdown"
-        >
-          View Progress
-        </button>
-      </div>
+      <button id="wd-view-progress-btn" className="btn btn-lg btn-secondary">
+        View Progress
+      </button>
 
       <div className="dropdown d-inline">
         <button
           id="wd-publish-all-btn"
           className="btn btn-lg btn-secondary dropdown-toggle "
-          type="button"
           data-bs-toggle="dropdown"
         >
           <GreenCheckmark />
@@ -88,15 +73,10 @@ export default function ModulesControls() {
         </ul>
       </div>
 
-      <div>
-        <button id="wd-add-module-btn" className="btn btn-lg btn-danger">
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Module
-        </button>
-      </div>
+      <button id="wd-add-module-btn" className="btn btn-lg btn-danger">
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+        Module
+      </button>
     </div>
   );
 }
