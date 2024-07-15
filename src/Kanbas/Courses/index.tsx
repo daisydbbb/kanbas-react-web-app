@@ -18,7 +18,7 @@ export default function Courses() {
 
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-2">
+          <div className="d-none d-lg-block col-md-2">
             <CoursesNavigation />
           </div>
           <div className="col-md-10">

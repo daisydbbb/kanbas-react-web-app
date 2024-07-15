@@ -25,20 +25,20 @@ export default function AssignmentEditor() {
       <br />
 
       <div id="wd-points" className="row">
-        <div className="col col-md-4 d-flex align-items-center justify-content-end">
+        <div className="col-md-4 d-flex align-items-center justify-content-end">
           Points
         </div>
-        <div className="col col-md-8">
+        <div className="col-md-8">
           <input className="form-control" value={100} />
         </div>
       </div>
       <br />
 
       <div id="wd-group" className="row">
-        <div className="col col-md-4 d-flex align-items-center justify-content-end">
+        <div className="col-md-4 d-flex align-items-center justify-content-end">
           Assignment Group
         </div>
-        <div className="dropdown col col-md-8">
+        <div className="col-md-8 dropdown">
           <select className="form-control">
             <option>ASSIGNMENTS</option>
           </select>
@@ -47,10 +47,10 @@ export default function AssignmentEditor() {
       <br />
 
       <div id="wd-display-grade-as" className="row">
-        <div className="col col-md-4 d-flex align-items-center justify-content-end">
+        <div className="col-md-4 d-flex align-items-center justify-content-end">
           Display Grade as
         </div>
-        <div className="dropdown col col-md-8">
+        <div className="col-md-8 dropdown">
           <select className="form-control">
             <option>Percentage</option>
           </select>
@@ -59,10 +59,10 @@ export default function AssignmentEditor() {
       <br />
 
       <div className="row">
-        <div className="col col-md-4 d-flex align-items-top justify-content-end">
+        <div className="col-md-4 d-flex align-items-top justify-content-end">
           Submission Type
         </div>
-        <div className="col col-md-8 ">
+        <div className="col-md-8 ">
           <div className="card">
             <div className="card-body dropdown">
               <select className="form-control">
@@ -116,10 +116,10 @@ export default function AssignmentEditor() {
       <br />
 
       <div className="row">
-        <div className="col col-md-4 d-flex align-items-top justify-content-end">
+        <div className="col-md-4 d-flex align-items-top justify-content-end">
           Assign
         </div>
-        <div className="col col-md-8">
+        <div className="col-md-8">
           <div className="form-control">
             <b>Assign to</b>
             <input className="form-control" value="Everyone" />
@@ -171,7 +171,7 @@ export default function AssignmentEditor() {
         </button>
         <button
           id="button-right-align"
-          className="btn btn-lg btn-danger  me-1 float-end"
+          className="btn btn-lg btn-danger me-1 float-end"
         >
           Save
         </button>
