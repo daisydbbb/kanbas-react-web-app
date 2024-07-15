@@ -1,6 +1,6 @@
 export default function GradeTable() {
   return (
-    <div className="table-responsive">
+    <div>
       <table className="table table-striped table-bordered table-hover ">
         <thead className="table-secondary ">
           <tr>

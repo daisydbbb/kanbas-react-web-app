@@ -24,34 +24,43 @@ export default function AssignmentEditor() {
       </div>
       <br />
 
-      <div id="wd-points" className="row">
-        <div className="col-md-4 d-flex align-items-center justify-content-end">
+      <div className="row">
+        <label
+          htmlFor="wd-points"
+          className="col-sm-4 d-flex align-items-center justify-content-end"
+        >
           Points
-        </div>
-        <div className="col-md-8">
-          <input className="form-control" value={100} />
+        </label>
+        <div className="col-sm-8">
+          <input id="wd-points" className="form-control" value={100} />
         </div>
       </div>
       <br />
 
-      <div id="wd-group" className="row">
-        <div className="col-md-4 d-flex align-items-center justify-content-end">
+      <div className="row">
+        <label
+          htmlFor="wd-group"
+          className="col-sm-4 d-flex align-items-center justify-content-end"
+        >
           Assignment Group
-        </div>
-        <div className="col-md-8 dropdown">
-          <select className="form-control">
+        </label>
+        <div className="col-sm-8 dropdown">
+          <select id="wd-group" className="form-control">
             <option>ASSIGNMENTS</option>
           </select>
         </div>
       </div>
       <br />
 
-      <div id="wd-display-grade-as" className="row">
-        <div className="col-md-4 d-flex align-items-center justify-content-end">
+      <div className="row">
+        <label
+          htmlFor="wd-display-grade-as"
+          className="col-sm-4 d-flex align-items-center justify-content-end"
+        >
           Display Grade as
-        </div>
-        <div className="col-md-8 dropdown">
-          <select className="form-control">
+        </label>
+        <div className="col-sm-8 dropdown">
+          <select id="wd-display-grade-as" className="form-control">
             <option>Percentage</option>
           </select>
         </div>
@@ -59,10 +68,10 @@ export default function AssignmentEditor() {
       <br />
 
       <div className="row">
-        <div className="col-md-4 d-flex align-items-top justify-content-end">
+        <label className="col-sm-4 d-flex align-items-top justify-content-end">
           Submission Type
-        </div>
-        <div className="col-md-8 ">
+        </label>
+        <div className="col-sm-8 ">
           <div className="card">
             <div className="card-body dropdown">
               <select className="form-control">
@@ -116,13 +125,13 @@ export default function AssignmentEditor() {
       <br />
 
       <div className="row">
-        <div className="col-md-4 d-flex align-items-top justify-content-end">
+        <label className="col-sm-4 d-flex align-items-top justify-content-end">
           Assign
-        </div>
-        <div className="col-md-8">
+        </label>
+        <div className="col-sm-8">
           <div className="form-control">
             <b>Assign to</b>
-            <input className="form-control" value="Everyone" />
+            <input className="form-control" defaultValue="Everyone" />
             <br />
             <b>Due</b>
             <input
@@ -132,7 +141,7 @@ export default function AssignmentEditor() {
               defaultValue="2024-05-13"
             />
             <br />
-            <div className="availabe-time-container">
+            <div id="availabe-time-container">
               <div className="row">
                 <div className="col">
                   <b>Available from </b>

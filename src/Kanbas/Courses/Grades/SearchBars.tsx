@@ -7,7 +7,10 @@ export default function SearchBars() {
         <div className="col">
           <b>Student Names</b>
           <br />
-          <div className="search-bar d-inline-flex p-2 with-border w-100 mt-2">
+          <div
+            id="search-bar"
+            className="d-inline-flex p-2 with-border w-100 mt-2"
+          >
             <CiSearch className="me-1 fs-3" />
             <input
               id="wd-search-assignment"
@@ -20,7 +23,10 @@ export default function SearchBars() {
         <div className="col">
           <b>Assignment Names</b>
           <br />
-          <div className="search-bar d-inline-flex p-2 with-border w-100 mt-2">
+          <div
+            id="search-bar"
+            className="d-inline-flex p-2 with-border w-100 mt-2"
+          >
             <CiSearch className="me-1 fs-3" />
             <input
               id="wd-search-assignment"
@@ -32,7 +38,7 @@ export default function SearchBars() {
         </div>
       </div>
       <div>
-        <button className="btn btn-lg btn-secondary me-2 mt-3">
+        <button className="btn btn-lg btn-secondary me-2 mt-3 mb-3">
           <span>
             <LuFilter className="me-1 fs-4" />
           </span>{" "}
