@@ -7,20 +7,22 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function Kanbas() {
   return (
-    <div id="wd-kanbas">
-      <div className="d-none d-md-block bg-black">
-        <KanbasNavigation />
-      </div>
+    <div id="wd-kanbas" className="h-100">
+      <div className="d-flex h-100">
+        <div className="bg-black d-none d-md-block">
+          <KanbasNavigation />
+        </div>
 
-      <div className="wd-main-content-offset p-3">
-        <Routes>
-          <Route path="/" element={<Navigate to="Dashboard" />} />
-          <Route path="Account" element={<h1>Account</h1>} />
-          <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Courses/:id/*" element={<Courses />} />
-          <Route path="Calendar" element={<h1>Calendar</h1>} />
-          <Route path="Inbox" element={<h1>Inbox</h1>} />
-        </Routes>
+        <div className="flex-fill p-4">
+          <Routes>
+            <Route path="/" element={<Navigate to="Dashboard" />} />
+            <Route path="Account" element={<h1>Account</h1>} />
+            <Route path="Dashboard" element={<Dashboard />} />
+            <Route path="Courses/:id/*" element={<Courses />} />
+            <Route path="Calendar" element={<h1>Calendar</h1>} />
+            <Route path="Inbox" element={<h1>Inbox</h1>} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

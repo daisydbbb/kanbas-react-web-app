@@ -12,11 +12,6 @@ body * {
   }
 }
 
-.fixed-size-card {
-  width: 250px;
-  height: 300px;
-}
-
 .btn-secondary {
   --bs-btn-color: #000;
   --bs-btn-bg: #c7cdd1;
