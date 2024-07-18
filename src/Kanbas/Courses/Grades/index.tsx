@@ -8,6 +8,7 @@ export default function Grades() {
   const { cid } = useParams();
   const assignments = db.assignments.filter((a) => a.course === cid);
   const enrollments = db.enrollments.filter((e) => e.course === cid);
+  const users = db.users;
   const grades = db.grades;
 
   // generate the matrix for grade mapping
@@ -19,12 +20,16 @@ export default function Grades() {
       );
       studentGrades[a._id] = grade ? grade.grade : "";
     });
+
+    const [user] = users.filter((u) => u._id === e.user);
+    const user_name = user.firstName + " " + user.lastName;
+
     return {
-      student: e.user,
+      student: user_name,
       grades: studentGrades, //{A102: '92'}
     };
   });
-  console.log("HERE", gradeMatrix);
+  // console.log("HERE", gradeMatrix);
 
   return (
     <div id="wd-grades" className="row">
