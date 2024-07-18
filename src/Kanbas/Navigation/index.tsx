@@ -15,7 +15,10 @@ export default function KanbasNavigation() {
   ];
 
   return (
-    <div id="wd-kanbas-navigation" className="list-group rounded-0 bg-black">
+    <div
+      id="wd-kanbas-navigation"
+      className="list-group rounded-0 full-page-height"
+    >
       <a
         id="wd-account-link"
         target="_blank"

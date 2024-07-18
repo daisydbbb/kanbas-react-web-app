@@ -9,7 +9,7 @@ export default function Dashboard() {
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
       <hr />
       <div id="wd-dashboard-courses" className="row">
-        <div className="row row-cols-1 row-cols-md-5 g-4">
+        <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
           {courses.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <Link
@@ -17,7 +17,10 @@ export default function Dashboard() {
                 className="text-decoration-none"
               >
                 <div className="card rounded-3 overflow-hidden">
-                  <img src="/images/reactjs.jpg" height="{160}" />
+                  <img
+                    src={`/images/dashboard_img/${course._id}.jpg`}
+                    height="160px"
+                  />
                   <div className="card-body">
                     <span
                       className="wd-dashboard-course-link"
