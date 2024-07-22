@@ -9,8 +9,25 @@ import { useParams } from "react-router";
 import * as db from "../../Database";
 
 const formatDate = (dateString: any) => {
-  const options: Intl.DateTimeFormatOptions = { month: "long", day: "numeric" };
-  return new Date(dateString).toLocaleDateString("en-US", options);
+  const date = new Date(dateString);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const day = date.getUTCDate();
+  const month = monthNames[date.getUTCMonth()];
+  const formattedDate = `${month} ${day}`;
+  return formattedDate;
 };
 
 export default function Assignments() {
