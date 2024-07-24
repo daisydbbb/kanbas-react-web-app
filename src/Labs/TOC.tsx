@@ -40,7 +40,7 @@ export default function TOC() {
         <a
           id="wd-a3"
           href="#/Labs/Lab4"
-          className={`nav-link ${pathname.includes("Lab3") ? "active" : ""}`}
+          className={`nav-link ${pathname.includes("Lab4") ? "active" : ""}`}
         >
           Lab 4
         </a>

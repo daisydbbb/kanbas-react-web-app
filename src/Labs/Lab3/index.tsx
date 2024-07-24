@@ -30,8 +30,10 @@ import Add from "./Add";
 import Square from "./Square";
 import Highlight from "./Highlight";
 import PathParameters from "./PathParameters";
+import { useSelector } from "react-redux";
 
 export default function Lab3() {
+  const { todos } = useSelector((state: any) => state.todosReducer);
   return (
     <div id="wd-lab3" className="container-fluid">
       console.log("Hello World!")
@@ -41,6 +43,16 @@ export default function Lab3() {
         <a href="https://github.com/daisydbbb/kanbas-react-web-app/tree/a3">
           GitHub
         </a>
+      </div>
+      <ul className="list-group">
+        {todos.map((todo: any) => (
+          <li className="list-group-item" key={todo.id}>
+            {todo.title}
+          </li>
+        ))}
+      </ul>
+      <hr />
+      <div>
         <VariablesAndConstants />
         <VariableTypes />
         <BooleanVariables />

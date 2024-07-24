@@ -1,6 +1,5 @@
 import ImportExportSettingIcons from "./ImportExportSettingIcons";
 import SearchBars from "./SearchBars";
-import GradeTable from "./GradeTable";
 import { useParams } from "react-router";
 import * as db from "../../Database";
 
