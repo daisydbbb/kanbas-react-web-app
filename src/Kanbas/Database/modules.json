@@ -234,7 +234,7 @@
     ]
   },
   {
-    "_id": "M101",
+    "_id": "M401",
     "name": "Organic Chemistry I",
     "description": "Introduction to the principles and reactions of organic chemistry.",
     "course": "RS104",
@@ -243,24 +243,24 @@
         "_id": "L101",
         "name": "Introduction to Organic Chemistry",
         "description": "Basic concepts and history of organic chemistry.",
-        "module": "M101"
+        "module": "M401"
       },
       {
         "_id": "L102",
         "name": "Hydrocarbons",
         "description": "Study of the structure, properties, and reactions of hydrocarbons.",
-        "module": "M101"
+        "module": "M401"
       },
       {
         "_id": "L103",
         "name": "Functional Groups",
         "description": "Overview of different functional groups in organic molecules and their reactions.",
-        "module": "M101"
+        "module": "M401"
       }
     ]
   },
   {
-    "_id": "M102",
+    "_id": "M402",
     "name": "Organic Chemistry II",
     "description": "Detailed study of organic reactions and mechanisms.",
     "course": "RS104",
@@ -269,24 +269,24 @@
         "_id": "L104",
         "name": "Organic Reaction Mechanisms",
         "description": "In-depth analysis of various organic reaction mechanisms.",
-        "module": "M102"
+        "module": "M402"
       },
       {
         "_id": "L105",
         "name": "Stereochemistry",
         "description": "Understanding the spatial arrangement of atoms in organic molecules.",
-        "module": "M102"
+        "module": "M402"
       },
       {
         "_id": "L106",
         "name": "Organic Synthesis",
         "description": "Principles and strategies for the synthesis of organic compounds.",
-        "module": "M102"
+        "module": "M402"
       }
     ]
   },
   {
-    "_id": "M103",
+    "_id": "M403",
     "name": "Advanced Organic Chemistry",
     "description": "Advanced topics in organic chemistry and applications.",
     "course": "RS104",
@@ -295,175 +295,19 @@
         "_id": "L107",
         "name": "Advanced Organic Reactions",
         "description": "Study of advanced organic reactions and their applications.",
-        "module": "M103"
+        "module": "M403"
       },
       {
         "_id": "L108",
         "name": "Bioorganic Chemistry",
         "description": "Intersection of organic chemistry and biochemistry.",
-        "module": "M103"
+        "module": "M403"
       },
       {
         "_id": "L109",
         "name": "Medicinal Chemistry",
         "description": "Application of organic chemistry principles in drug discovery and development.",
-        "module": "M103"
-      }
-    ]
-  },
-  {
-    "_id": "M101",
-    "name": "Fundamentals of Inorganic Chemistry",
-    "description": "Introduction to the principles and concepts of inorganic chemistry.",
-    "course": "RS105",
-    "lessons": [
-      {
-        "_id": "L101",
-        "name": "Introduction to Inorganic Chemistry",
-        "description": "Basic concepts and history of inorganic chemistry.",
-        "module": "M101"
-      },
-      {
-        "_id": "L102",
-        "name": "Periodic Table and Atomic Structure",
-        "description": "Study of the periodic table, atomic structure, and periodic properties.",
-        "module": "M101"
-      },
-      {
-        "_id": "L103",
-        "name": "Chemical Bonding",
-        "description": "Overview of ionic, covalent, and metallic bonding in inorganic compounds.",
-        "module": "M101"
-      }
-    ]
-  },
-  {
-    "_id": "M102",
-    "name": "Intermediate Inorganic Chemistry",
-    "description": "Advanced concepts and applications in inorganic chemistry.",
-    "course": "RS105",
-    "lessons": [
-      {
-        "_id": "L104",
-        "name": "Coordination Chemistry",
-        "description": "Study of coordination compounds and their properties.",
-        "module": "M102"
-      },
-      {
-        "_id": "L105",
-        "name": "Transition Metals",
-        "description": "In-depth look at the chemistry of transition metals and their complexes.",
-        "module": "M102"
-      },
-      {
-        "_id": "L106",
-        "name": "Organometallic Chemistry",
-        "description": "Introduction to organometallic compounds and their applications.",
-        "module": "M102"
-      }
-    ]
-  },
-  {
-    "_id": "M103",
-    "name": "Advanced Inorganic Chemistry",
-    "description": "Advanced topics and current research in inorganic chemistry.",
-    "course": "RS105",
-    "lessons": [
-      {
-        "_id": "L107",
-        "name": "Bioinorganic Chemistry",
-        "description": "Exploration of the role of metals in biological systems.",
-        "module": "M103"
-      },
-      {
-        "_id": "L108",
-        "name": "Solid State Chemistry",
-        "description": "Study of the structure, properties, and applications of solid materials.",
-        "module": "M103"
-      },
-      {
-        "_id": "L109",
-        "name": "Inorganic Reaction Mechanisms",
-        "description": "Understanding the mechanisms of reactions involving inorganic compounds.",
-        "module": "M103"
-      }
-    ]
-  },
-  {
-    "_id": "M101",
-    "name": "Fundamentals of Physical Chemistry",
-    "description": "Introduction to the principles and concepts of physical chemistry.",
-    "course": "RS106",
-    "lessons": [
-      {
-        "_id": "L101",
-        "name": "Thermodynamics",
-        "description": "Basic principles of thermodynamics and their applications in chemistry.",
-        "module": "M101"
-      },
-      {
-        "_id": "L102",
-        "name": "Chemical Kinetics",
-        "description": "Study of the rates of chemical reactions and factors affecting them.",
-        "module": "M101"
-      },
-      {
-        "_id": "L103",
-        "name": "Quantum Chemistry",
-        "description": "Introduction to quantum mechanics and its applications in chemistry.",
-        "module": "M101"
-      }
-    ]
-  },
-  {
-    "_id": "M102",
-    "name": "Intermediate Physical Chemistry",
-    "description": "Advanced concepts and applications in physical chemistry.",
-    "course": "RS106",
-    "lessons": [
-      {
-        "_id": "L104",
-        "name": "Statistical Mechanics",
-        "description": "Principles of statistical mechanics and their use in physical chemistry.",
-        "module": "M102"
-      },
-      {
-        "_id": "L105",
-        "name": "Spectroscopy",
-        "description": "Study of the interaction of electromagnetic radiation with matter.",
-        "module": "M102"
-      },
-      {
-        "_id": "L106",
-        "name": "Electrochemistry",
-        "description": "Fundamentals of electrochemistry and its applications.",
-        "module": "M102"
-      }
-    ]
-  },
-  {
-    "_id": "M103",
-    "name": "Advanced Physical Chemistry",
-    "description": "Advanced topics and current research in physical chemistry.",
-    "course": "RS106",
-    "lessons": [
-      {
-        "_id": "L107",
-        "name": "Advanced Quantum Chemistry",
-        "description": "In-depth study of quantum chemistry principles and methods.",
-        "module": "M103"
-      },
-      {
-        "_id": "L108",
-        "name": "Surface Chemistry",
-        "description": "Study of chemical processes at surfaces and interfaces.",
-        "module": "M103"
-      },
-      {
-        "_id": "L109",
-        "name": "Computational Chemistry",
-        "description": "Introduction to computational methods used in physical chemistry.",
-        "module": "M103"
+        "module": "M403"
       }
     ]
   }

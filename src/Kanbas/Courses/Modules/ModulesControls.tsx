@@ -1,7 +1,17 @@
 import { FaPlus } from "react-icons/fa6";
 import { IoBan } from "react-icons/io5";
 import GreenCheckmark from "./GreenCheckmark";
-export default function ModulesControls() {
+import ModuleEditor from "./ModuleEditor";
+
+export default function ModulesControls({
+  moduleName,
+  setModuleName,
+  addModule,
+}: {
+  moduleName: string;
+  setModuleName: (title: string) => void;
+  addModule: () => void;
+}) {
   return (
     <div
       id="wd-modules-controls"
@@ -73,10 +83,22 @@ export default function ModulesControls() {
         </ul>
       </div>
 
-      <button id="wd-add-module-btn" className="btn btn-lg btn-danger">
+      <button
+        id="wd-add-module-btn"
+        className="btn btn-lg btn-danger"
+        data-bs-toggle="modal"
+        data-bs-target="#wd-add-module-dialog"
+      >
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module
       </button>
+
+      <ModuleEditor
+        dialogTitle="Add Module"
+        moduleName={moduleName}
+        setModuleName={setModuleName}
+        addModule={addModule}
+      />
     </div>
   );
 }
