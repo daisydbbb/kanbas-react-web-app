@@ -1,7 +1,7 @@
 import { useParams, useLocation } from "react-router";
 import * as db from "../../Database";
 
-export default function AssignmentEditor() {
+export default function Editor() {
   const { cid } = useParams();
   const assignments = db.assignments;
   const { pathname } = useLocation();
@@ -63,7 +63,7 @@ export default function AssignmentEditor() {
             </div>
             <br />
 
-            <div id="assignment-group" className="row">
+            {/* <div id="assignment-group" className="row">
               <label
                 htmlFor="wd-group"
                 className="col-sm-4 d-flex align-items-center justify-content-end"
@@ -149,8 +149,8 @@ export default function AssignmentEditor() {
                   </div>
                 </div>
               </div>
-            </div>
-            <br />
+            </div> */}
+            {/* <br /> */}
 
             <div id="assignment-assign" className="row">
               <label className="col-sm-4 d-flex align-items-top justify-content-end">
@@ -158,9 +158,9 @@ export default function AssignmentEditor() {
               </label>
               <div className="col-sm-8">
                 <div className="form-control">
-                  <b>Assign to</b>
+                  {/* <b>Assign to</b>
                   <input className="form-control" defaultValue="Everyone" />
-                  <br />
+                  <br /> */}
                   <b>Due</b>
                   <input
                     className="form-control"

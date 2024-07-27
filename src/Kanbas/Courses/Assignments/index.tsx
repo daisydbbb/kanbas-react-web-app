@@ -6,7 +6,15 @@ import { MdExpandMore } from "react-icons/md";
 import Weighing from "./Weighing";
 import AssignmentLeftIcons from "./AssignmentLeftIcons";
 import { useParams } from "react-router";
-import * as db from "../../Database";
+// import * as db from "../../Database";
+import React, { useState } from "react";
+import {
+  addAssignment,
+  deleteAssignment,
+  renameAssignment,
+  updateName,
+} from "./reducer";
+import { useSelector, useDispatch } from "react-redux";
 
 const formatDate = (dateString: any) => {
   const date = new Date(dateString);
@@ -32,12 +40,21 @@ const formatDate = (dateString: any) => {
 
 export default function Assignments() {
   const { cid } = useParams();
-  const assignments = db.assignments;
+  const [assignmentName, setAssignmentName] = useState("");
+  const { assignments } = useSelector((state: any) => state.assignmentsReducer);
+  const dispatch = useDispatch();
 
   return (
     <div id="wd-assignments" className="row">
       <div id="wd-search-assignment" className="col-12 mb-4 ">
-        <SearchAndAdd />
+        <SearchAndAdd
+          assignmentName={assignmentName}
+          setAssignmentName={setAssignmentName}
+          addAssignment={() => {
+            dispatch(addAssignment({ title: assignmentName, course: cid }));
+            setAssignmentName("");
+          }}
+        />
       </div>
       <div className="row">
         <li className="list-group-item p-0 mb-5 fs-5 border-gray">
@@ -50,50 +67,77 @@ export default function Assignments() {
           </div>
           <ul id="wd-assignments-list" className="list-group rounded-0">
             {assignments
-              .filter((assignment) => assignment.course === cid)
-              .map((assignment) => (
+              .filter((assignment: any) => assignment.course === cid)
+              .map((assignment: any) => (
                 <li className="wd-assignment-list-item list-group-item p-3 ps-1 left-green">
-                  <a
-                    id="wd-assignment-link"
-                    className="text-decoration-none text-dark"
-                    href={`#/Kanbas/Courses/${cid}/Assignments/${assignment._id}`}
-                  >
-                    <div className="container">
-                      <div className="row justify-content-md-center">
-                        <div
-                          id="assignment-left-icons"
-                          className="col-auto d-flex"
-                        >
-                          <AssignmentLeftIcons />
-                        </div>
-                        <div id="assignment-content" className="col">
-                          <ul className="list-unstyled mb-0">
-                            <div style={{ fontSize: "24px" }}>
-                              <b>{assignment.title}</b>
-                            </div>
-                            <div>
-                              <span style={{ color: "red" }}>
-                                Multiple Modules{" "}
-                              </span>
-                              | <b>Not available until</b>{" "}
-                              {formatDate(assignment.available_from)} at 12:00
-                              am |
-                            </div>
-                            <div>
-                              <b>Due</b> {formatDate(assignment.due)} at 11:59pm
-                              | {assignment.points} pts
-                            </div>
-                          </ul>
-                        </div>
-                        <div
-                          id="assignment_status"
-                          className="col-auto assignment_status_pos"
-                        >
-                          <AssignmentControlButton />
-                        </div>
+                  <div className="container">
+                    <div className="row justify-content-md-center">
+                      <div
+                        id="assignment-left-icons"
+                        className="col-auto d-flex"
+                      >
+                        <AssignmentLeftIcons />
+                      </div>
+                      <div id="assignment-content" className="col">
+                        <ul className="list-unstyled mb-0">
+                          <div style={{ fontSize: "24px" }}>
+                            {!assignment.editing && assignment.title}
+                            {assignment.editing && (
+                              <input
+                                className="form-control w-50 d-inline-block"
+                                onChange={(e) =>
+                                  dispatch(
+                                    updateName({
+                                      ...assignment,
+                                      title: e.target.value,
+                                    })
+                                  )
+                                }
+                                onKeyDown={(e) => {
+                                  if (e.key === "Enter") {
+                                    dispatch(
+                                      updateName({
+                                        ...assignment,
+                                        editing: false,
+                                      })
+                                    );
+                                  }
+                                }}
+                                value={assignment.title}
+                              />
+                            )}
+                          </div>
+                          <div>
+                            <span style={{ color: "red" }}>
+                              Multiple Modules{" "}
+                            </span>
+                            | <b>Not available until</b>{" "}
+                            {formatDate(assignment.available_from)} at 12:00 am
+                            |
+                          </div>
+                          <div>
+                            <b>Due</b> {formatDate(assignment.due)} at 11:59pm |{" "}
+                            {assignment.points} pts
+                          </div>
+                        </ul>
+                      </div>
+                      <div
+                        id="assignment_status"
+                        className="col-auto assignment_status_pos"
+                      >
+                        <AssignmentControlButton
+                          assignmentId={assignment._id}
+                          deleteAssignment={(assignmentId) => {
+                            dispatch(deleteAssignment(assignmentId));
+                          }}
+                          renameAssignment={(assignmentId) => {
+                            dispatch(renameAssignment(assignmentId));
+                          }}
+                          cid={cid}
+                        />
                       </div>
                     </div>
-                  </a>
+                  </div>
                 </li>
               ))}
           </ul>
