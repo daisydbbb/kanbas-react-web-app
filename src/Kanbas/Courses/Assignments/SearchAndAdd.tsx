@@ -1,7 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import "./style.css";
-import AssignmentEditor from "./AssignmentEditor";
+import AddAssignmentEditor from "./AddAssignmentEditor";
 
 export default function SearchAndAdd({
   assignmentName,
@@ -33,7 +33,7 @@ export default function SearchAndAdd({
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Assignment
       </button>
-      <AssignmentEditor
+      <AddAssignmentEditor
         dialogTitle="Add Assignment"
         assignmentName={assignmentName}
         setAssignmentName={setAssignmentName}

@@ -6,14 +6,8 @@ import { MdExpandMore } from "react-icons/md";
 import Weighing from "./Weighing";
 import AssignmentLeftIcons from "./AssignmentLeftIcons";
 import { useParams } from "react-router";
-// import * as db from "../../Database";
 import React, { useState } from "react";
-import {
-  addAssignment,
-  deleteAssignment,
-  renameAssignment,
-  updateName,
-} from "./reducer";
+import { addAssignment, renameAssignment, updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const formatDate = (dateString: any) => {
@@ -87,7 +81,7 @@ export default function Assignments() {
                                 className="form-control w-50 d-inline-block"
                                 onChange={(e) =>
                                   dispatch(
-                                    updateName({
+                                    updateAssignment({
                                       ...assignment,
                                       title: e.target.value,
                                     })
@@ -96,7 +90,7 @@ export default function Assignments() {
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter") {
                                     dispatch(
-                                      updateName({
+                                      updateAssignment({
                                         ...assignment,
                                         editing: false,
                                       })
@@ -112,12 +106,14 @@ export default function Assignments() {
                               Multiple Modules{" "}
                             </span>
                             | <b>Not available until</b>{" "}
-                            {formatDate(assignment.available_from)} at 12:00 am
-                            |
+                            {assignment.available_from &&
+                              formatDate(assignment.available_from)}{" "}
+                            at 12:00 am |
                           </div>
                           <div>
-                            <b>Due</b> {formatDate(assignment.due)} at 11:59pm |{" "}
-                            {assignment.points} pts
+                            <b>Due</b>{" "}
+                            {assignment.due && formatDate(assignment.due)} at
+                            11:59pm | {assignment.points} pts
                           </div>
                         </ul>
                       </div>
@@ -127,9 +123,6 @@ export default function Assignments() {
                       >
                         <AssignmentControlButton
                           assignmentId={assignment._id}
-                          deleteAssignment={(assignmentId) => {
-                            dispatch(deleteAssignment(assignmentId));
-                          }}
                           renameAssignment={(assignmentId) => {
                             dispatch(renameAssignment(assignmentId));
                           }}
