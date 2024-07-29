@@ -1,21 +1,15 @@
 import { FaPlus } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import "./style.css";
-import AddAssignmentEditor from "./AddAssignmentEditor";
+import { useNavigate } from "react-router-dom";
 
-export default function SearchAndAdd({
-  assignmentName,
-  setAssignmentName,
-  assignmentDescription,
-  setAssignmentDescription,
-  addAssignment,
-}: {
-  assignmentName: string;
-  setAssignmentName: (name: string) => void;
-  assignmentDescription: string;
-  setAssignmentDescription: (name: string) => void;
-  addAssignment: () => void;
-}) {
+export default function SearchAndAdd({ cid }: { cid: string | undefined }) {
+  const navigate = useNavigate();
+  const handleAdd = () => {
+    const _id = new Date().getTime().toString();
+    navigate(`/Kanbas/Courses/${cid}/Assignments/${_id}`);
+  };
+
   return (
     <div>
       <div className="search-bar wd-grid-col-third-page d-inline-flex p-2 with-border">
@@ -31,20 +25,11 @@ export default function SearchAndAdd({
       <button
         id="wd-add-assignment"
         className="btn btn-lg btn-danger float-end me-4"
-        data-bs-toggle="modal"
-        data-bs-target="#wd-add-assign-dialog"
+        onClick={handleAdd}
       >
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Assignment
       </button>
-      <AddAssignmentEditor
-        dialogTitle="Add Assignment"
-        assignmentName={assignmentName}
-        setAssignmentName={setAssignmentName}
-        assignmentDescription={assignmentDescription}
-        setAssignmentDescription={setAssignmentDescription}
-        addAssignment={addAssignment}
-      />
 
       <button
         id="wd-add-assignmen-group"

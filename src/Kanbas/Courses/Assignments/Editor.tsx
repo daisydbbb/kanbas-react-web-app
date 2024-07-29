@@ -1,6 +1,6 @@
 import { useParams, useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { updateAssignment } from "./reducer";
+import { addAssignment, updateAssignment } from "./reducer";
 import React, { useState } from "react";
 
 export default function Editor() {
@@ -11,10 +11,24 @@ export default function Editor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const currentAssignment = assignments.filter(
+  let currentAssignment = assignments.filter(
     (assignment: any) =>
       assignment.course === cid && assignment._id === assignment_id
   )[0];
+  let isNew = false;
+  if (currentAssignment === undefined) {
+    isNew = true;
+    currentAssignment = {
+      _id: assignment_id,
+      title: "New Assignment",
+      course: cid,
+      due: "",
+      available_from: "",
+      available_to: "",
+      points: "100",
+      description: "New Assignment Description",
+    };
+  }
 
   const [form, setForm] = useState(currentAssignment);
 
@@ -24,6 +38,9 @@ export default function Editor() {
 
   const handleSave = () => {
     alert("New edits have been saved!");
+    if (isNew) {
+      dispatch(addAssignment(form));
+    }
     dispatch(updateAssignment(form));
     navigate(-1);
   };

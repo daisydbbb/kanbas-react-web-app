@@ -6,8 +6,7 @@ import { MdExpandMore } from "react-icons/md";
 import Weighing from "./Weighing";
 import AssignmentLeftIcons from "./AssignmentLeftIcons";
 import { useParams } from "react-router";
-import React, { useState } from "react";
-import { addAssignment, updateAssignment } from "./reducer";
+import { updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const formatDate = (dateString: any) => {
@@ -34,33 +33,13 @@ const formatDate = (dateString: any) => {
 
 export default function Assignments() {
   const { cid } = useParams();
-  const [assignmentName, setAssignmentName] = useState("New Assignment");
-  const [assignmentDescription, setAssignmentDescription] = useState(
-    "New Assignment Description"
-  );
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
 
   return (
     <div id="wd-assignments" className="row">
       <div id="wd-search-assignment" className="col-12 mb-4 ">
-        <SearchAndAdd
-          assignmentName={assignmentName}
-          setAssignmentName={setAssignmentName}
-          assignmentDescription={assignmentDescription}
-          setAssignmentDescription={setAssignmentDescription}
-          addAssignment={() => {
-            dispatch(
-              addAssignment({
-                title: assignmentName,
-                description: assignmentDescription,
-                course: cid,
-              })
-            );
-            setAssignmentName("New Assignment");
-            setAssignmentDescription("New Assignment Description");
-          }}
-        />
+        <SearchAndAdd cid={cid} />
       </div>
       <div className="row">
         <li className="list-group-item p-0 mb-5 fs-5 border-gray">
@@ -71,6 +50,7 @@ export default function Assignments() {
             <ModuleControlButtons />
             <Weighing />
           </div>
+
           <ul id="wd-assignments-list" className="list-group rounded-0">
             {assignments
               .filter((assignment: any) => assignment.course === cid)
