@@ -7,7 +7,7 @@ import Weighing from "./Weighing";
 import AssignmentLeftIcons from "./AssignmentLeftIcons";
 import { useParams } from "react-router";
 import React, { useState } from "react";
-import { addAssignment, renameAssignment, updateAssignment } from "./reducer";
+import { addAssignment, updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 
 const formatDate = (dateString: any) => {
@@ -34,7 +34,10 @@ const formatDate = (dateString: any) => {
 
 export default function Assignments() {
   const { cid } = useParams();
-  const [assignmentName, setAssignmentName] = useState("");
+  const [assignmentName, setAssignmentName] = useState("New Assignment");
+  const [assignmentDescription, setAssignmentDescription] = useState(
+    "New Assignment Description"
+  );
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
 
@@ -44,9 +47,18 @@ export default function Assignments() {
         <SearchAndAdd
           assignmentName={assignmentName}
           setAssignmentName={setAssignmentName}
+          assignmentDescription={assignmentDescription}
+          setAssignmentDescription={setAssignmentDescription}
           addAssignment={() => {
-            dispatch(addAssignment({ title: assignmentName, course: cid }));
-            setAssignmentName("");
+            dispatch(
+              addAssignment({
+                title: assignmentName,
+                description: assignmentDescription,
+                course: cid,
+              })
+            );
+            setAssignmentName("New Assignment");
+            setAssignmentDescription("New Assignment Description");
           }}
         />
       </div>
@@ -123,9 +135,6 @@ export default function Assignments() {
                       >
                         <AssignmentControlButton
                           assignmentId={assignment._id}
-                          renameAssignment={(assignmentId) => {
-                            dispatch(renameAssignment(assignmentId));
-                          }}
                           cid={cid}
                         />
                       </div>

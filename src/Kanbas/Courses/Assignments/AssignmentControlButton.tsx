@@ -6,14 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { deleteAssignment } from "./reducer";
 import { useDispatch } from "react-redux";
+import { renameAssignment } from "./reducer";
 
 export default function AssignmentControlButton({
   assignmentId,
-  renameAssignment,
   cid,
 }: {
   assignmentId: string;
-  renameAssignment: (assignmentId: string) => void;
   cid: string | undefined;
 }) {
   const navigate = useNavigate();
@@ -33,7 +32,7 @@ export default function AssignmentControlButton({
       <FaPencil
         className="text-primary me-2 mb-1"
         onClick={() => {
-          renameAssignment(assignmentId);
+          dispatch(renameAssignment(assignmentId));
         }}
       />
       <FaRegEdit
@@ -55,7 +54,7 @@ export default function AssignmentControlButton({
           <li
             className="dropdown-item"
             onClick={() => {
-              renameAssignment(assignmentId);
+              dispatch(renameAssignment(assignmentId));
             }}
           >
             <FaPencil className="text-primary me-2 mb-1" />

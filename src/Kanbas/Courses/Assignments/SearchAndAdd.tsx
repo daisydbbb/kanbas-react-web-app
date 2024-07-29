@@ -6,10 +6,14 @@ import AddAssignmentEditor from "./AddAssignmentEditor";
 export default function SearchAndAdd({
   assignmentName,
   setAssignmentName,
+  assignmentDescription,
+  setAssignmentDescription,
   addAssignment,
 }: {
   assignmentName: string;
   setAssignmentName: (name: string) => void;
+  assignmentDescription: string;
+  setAssignmentDescription: (name: string) => void;
   addAssignment: () => void;
 }) {
   return (
@@ -37,6 +41,8 @@ export default function SearchAndAdd({
         dialogTitle="Add Assignment"
         assignmentName={assignmentName}
         setAssignmentName={setAssignmentName}
+        assignmentDescription={assignmentDescription}
+        setAssignmentDescription={setAssignmentDescription}
         addAssignment={addAssignment}
       />
 

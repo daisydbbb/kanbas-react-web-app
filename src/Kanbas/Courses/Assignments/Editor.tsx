@@ -45,7 +45,7 @@ export default function Editor() {
         </div>
         <br />
 
-        <input
+        <textarea
           id="wd-description"
           className="form-control"
           value={form.description}
