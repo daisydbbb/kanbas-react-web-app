@@ -77,9 +77,9 @@ export default function WorkingWithObjects() {
         <input
           type="checkbox"
           id="wd-assignment-completed"
-          checked={assignment.completed}
+          defaultChecked={assignment.completed}
           onChange={(e) =>
-            setAssignment({ ...assignment, completed: !assignment.completed })
+            setAssignment({ ...assignment, completed: e.target.checked })
           }
         />
         <label htmlFor="wd-assignment-completed">

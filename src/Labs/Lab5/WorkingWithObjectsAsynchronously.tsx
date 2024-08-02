@@ -9,6 +9,11 @@ export default function WorkingWithObjectsAsynchronously() {
   useEffect(() => {
     fetchAssignment();
   }, []);
+  const updateTitle = async (title: string) => {
+    const updatedAssignment = await client.updateTitle(title);
+    setAssignment(updatedAssignment);
+  };
+
   return (
     <div id="wd-asynchronous-objects">
       <h3>Working with Objects Asynchronously</h3>
@@ -44,10 +49,16 @@ export default function WorkingWithObjectsAsynchronously() {
           }
         />
         <label className="form-check-label" htmlFor="wd-completed">
-          {" "}
-          Completed{" "}
+          Completed
         </label>
       </div>
+      <button
+        className="btn btn-primary me-2"
+        onClick={() => updateTitle(assignment.title)}
+      >
+        Update Title
+      </button>
+
       <pre>{JSON.stringify(assignment, null, 2)}</pre>
       <hr />
     </div>

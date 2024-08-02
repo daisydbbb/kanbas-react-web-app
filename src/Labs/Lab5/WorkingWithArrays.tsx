@@ -98,9 +98,9 @@ export default function WorkingWithArrays() {
       />
       <input
         type="checkbox"
-        checked={todo.completed}
+        defaultChecked={todo.completed}
         id="wd-todo-completed"
-        onChange={(e) => setTodo({ ...todo, completed: !todo.completed })}
+        onChange={(e) => setTodo({ ...todo, completed: e.target.checked })}
       />
       <label htmlFor="wd-todo-completed">Completed?</label>
       <br />
