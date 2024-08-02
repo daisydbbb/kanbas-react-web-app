@@ -12,7 +12,7 @@ export default function Lab5() {
       <h2>Lab 5</h2>
       <div id="wd-github">
         <a href="https://github.com/daisydbbb/kanbas-react-web-app/tree/a5">
-          GitHub
+          GitHub some edit
         </a>
       </div>
       <div className="list-group">
