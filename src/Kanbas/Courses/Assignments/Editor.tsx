@@ -2,6 +2,7 @@ import { useParams, useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addAssignment, updateAssignment } from "./reducer";
 import React, { useState } from "react";
+import * as client from "./client";
 
 export default function Editor() {
   const { cid } = useParams();
@@ -10,6 +11,18 @@ export default function Editor() {
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const createAssignment = async (assignment: any) => {
+    const newAssignment = await client.createAssignment(
+      cid as string,
+      assignment
+    );
+    dispatch(addAssignment(newAssignment));
+  };
+  const saveAssignment = async (assignment: any) => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
 
   let currentAssignment = assignments.filter(
     (assignment: any) =>
@@ -39,9 +52,9 @@ export default function Editor() {
   const handleSave = () => {
     alert("New edits have been saved!");
     if (isNew) {
-      dispatch(addAssignment(form));
+      createAssignment(form);
     }
-    dispatch(updateAssignment(form));
+    saveAssignment(form);
     navigate(-1);
   };
 

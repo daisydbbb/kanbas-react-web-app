@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function SearchAndAdd({ cid }: { cid: string | undefined }) {
   const navigate = useNavigate();
   const handleAdd = () => {
-    const _id = new Date().getTime().toString();
+    const _id = "new_id";
     navigate(`/Kanbas/Courses/${cid}/Assignments/${_id}`);
   };
 

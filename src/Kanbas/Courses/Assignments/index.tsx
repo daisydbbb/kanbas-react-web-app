@@ -6,8 +6,10 @@ import { MdExpandMore } from "react-icons/md";
 import Weighing from "./Weighing";
 import AssignmentLeftIcons from "./AssignmentLeftIcons";
 import { useParams } from "react-router";
-import { updateAssignment } from "./reducer";
+import { deleteAssignment, setAssignments, updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
+import * as client from "./client";
+import { useEffect } from "react";
 
 const formatDate = (dateString: any) => {
   const date = new Date(dateString);
@@ -35,6 +37,23 @@ export default function Assignments() {
   const { cid } = useParams();
   const { assignments } = useSelector((state: any) => state.assignmentsReducer);
   const dispatch = useDispatch();
+  const fetchAssignments = async () => {
+    const modules = await client.fetchAssignments(cid as string);
+    dispatch(setAssignments(modules));
+  };
+  useEffect(() => {
+    fetchAssignments();
+  }, []);
+
+  const removeAssignment = async (assignmentId: string) => {
+    await client.deleteAssignment(assignmentId);
+    dispatch(deleteAssignment(assignmentId));
+  };
+
+  const saveAssignment = async (assignment: any) => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
 
   return (
     <div id="wd-assignments" className="row">
@@ -72,21 +91,17 @@ export default function Assignments() {
                               <input
                                 className="form-control w-50 d-inline-block"
                                 onChange={(e) =>
-                                  dispatch(
-                                    updateAssignment({
-                                      ...assignment,
-                                      title: e.target.value,
-                                    })
-                                  )
+                                  saveAssignment({
+                                    ...assignment,
+                                    title: e.target.value,
+                                  })
                                 }
                                 onKeyDown={(e) => {
                                   if (e.key === "Enter") {
-                                    dispatch(
-                                      updateAssignment({
-                                        ...assignment,
-                                        editing: false,
-                                      })
-                                    );
+                                    saveAssignment({
+                                      ...assignment,
+                                      editing: false,
+                                    });
                                   }
                                 }}
                                 value={assignment.title}
@@ -114,8 +129,15 @@ export default function Assignments() {
                         className="col-auto assignment_status_pos"
                       >
                         <AssignmentControlButton
-                          assignmentId={assignment._id}
+                          // assignmentId={assignment._id}
+                          assignment={assignment}
                           cid={cid}
+                          deleteAssignment={(assignmentId: any) => {
+                            removeAssignment(assignmentId);
+                          }}
+                          // saveAssignment={(assignment: any) => {
+                          //   saveAssignment(assignment);
+                          // }}
                         />
                       </div>
                     </div>

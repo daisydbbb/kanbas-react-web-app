@@ -4,25 +4,27 @@ import { FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
-import { deleteAssignment } from "./reducer";
 import { useDispatch } from "react-redux";
 import { renameAssignment } from "./reducer";
 
 export default function AssignmentControlButton({
-  assignmentId,
+  assignment,
   cid,
+  deleteAssignment,
 }: {
-  assignmentId: string;
+  assignment: any;
   cid: string | undefined;
+  deleteAssignment: (assignmentId: string) => void;
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleDelete = () => {
     const userConfirmed: boolean = window.confirm(
       "Are you sure you want to delete the assignment?"
     );
     if (userConfirmed) {
-      dispatch(deleteAssignment(assignmentId));
+      deleteAssignment(assignment._id);
     }
   };
 
@@ -32,13 +34,13 @@ export default function AssignmentControlButton({
       <FaPencil
         className="text-primary me-2 mb-1"
         onClick={() => {
-          dispatch(renameAssignment(assignmentId));
+          dispatch(renameAssignment(assignment._id));
         }}
       />
       <FaRegEdit
         className="text-warning me-2 mb-1"
         onClick={() =>
-          navigate(`/Kanbas/Courses/${cid}/Assignments/${assignmentId}`)
+          navigate(`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`)
         }
       />
       <FaTrash className="text-danger me-2 mb-1" onClick={handleDelete} />
@@ -54,7 +56,7 @@ export default function AssignmentControlButton({
           <li
             className="dropdown-item"
             onClick={() => {
-              dispatch(renameAssignment(assignmentId));
+              dispatch(renameAssignment(assignment._id));
             }}
           >
             <FaPencil className="text-primary me-2 mb-1" />
@@ -64,7 +66,7 @@ export default function AssignmentControlButton({
           <li
             className="dropdown-item"
             onClick={() =>
-              navigate(`/Kanbas/Courses/${cid}/Assignments/${assignmentId}`)
+              navigate(`/Kanbas/Courses/${cid}/Assignments/${assignment._id}`)
             }
           >
             <FaRegEdit className="text-warning me-2 mb-1" />
