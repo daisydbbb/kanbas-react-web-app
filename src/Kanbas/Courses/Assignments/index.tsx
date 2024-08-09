@@ -11,26 +11,36 @@ import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
 import { useEffect } from "react";
 
-const formatDate = (dateString: any) => {
-  const date = new Date(dateString);
+const getDate = (dateString: any) => {
+  const date_string = dateString.split("T")[0];
+  const date = new Date(date_string);
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   const day = date.getUTCDate();
   const month = monthNames[date.getUTCMonth()];
   const formattedDate = `${month} ${day}`;
   return formattedDate;
+};
+const getTime = (dateString: any) => {
+  const timeString = dateString.split("T")[1];
+  // console.log("here", dateString, timeString);
+  if (timeString > "11:59") {
+    return timeString + "pm";
+  } else {
+    return timeString + " am";
+  }
 };
 
 export default function Assignments() {
@@ -114,13 +124,14 @@ export default function Assignments() {
                             </span>
                             | <b>Not available until</b>{" "}
                             {assignment.available_from &&
-                              formatDate(assignment.available_from)}{" "}
-                            at 12:00 am |
+                              getDate(assignment.available_from)}{" "}
+                            at {getTime(assignment.available_from)} |
                           </div>
                           <div>
                             <b>Due</b>{" "}
-                            {assignment.due && formatDate(assignment.due)} at
-                            11:59pm | {assignment.points} pts
+                            {assignment.due && getDate(assignment.due)} at{" "}
+                            {getTime(assignment.available_from)} |{" "}
+                            {assignment.points} pts
                           </div>
                         </ul>
                       </div>
@@ -129,15 +140,11 @@ export default function Assignments() {
                         className="col-auto assignment_status_pos"
                       >
                         <AssignmentControlButton
-                          // assignmentId={assignment._id}
                           assignment={assignment}
                           cid={cid}
                           deleteAssignment={(assignmentId: any) => {
                             removeAssignment(assignmentId);
                           }}
-                          // saveAssignment={(assignment: any) => {
-                          //   saveAssignment(assignment);
-                          // }}
                         />
                       </div>
                     </div>

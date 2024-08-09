@@ -12,7 +12,7 @@ export default function SearchAndAdd({ cid }: { cid: string | undefined }) {
 
   return (
     <div>
-      <div className="search-bar wd-grid-col-third-page d-inline-flex p-2 with-border">
+      <div className="search-bar wd-grid-col-third-page d-inline-flex p-1 with-border">
         <CiSearch className="me-1 fs-3" />
         <input
           id="wd-search-assignment"
