@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Dashboard({
   courses,
@@ -15,9 +16,20 @@ export default function Dashboard({
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
 }) {
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
   return (
     <div id="wd-dashboard">
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
+      <div>
+        <h1 id="wd-dashboard-title">Dashboard</h1>
+        <h4>
+          {currentUser && (
+            <>
+              {currentUser.username} ({currentUser.role})
+            </>
+          )}
+        </h4>
+      </div>
+      <hr />
       <div className="add-new-course">
         <h5>
           New Course

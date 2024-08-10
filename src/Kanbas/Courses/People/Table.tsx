@@ -91,7 +91,7 @@ export default function PeopleTable() {
             <tr key={user._id}>
               <td className="wd-full-name text-nowrap">
                 <Link to={user._id}>
-                  <span className="wd-first-name">{user.firstName}</span>
+                  <span className="wd-first-name">{user.firstName}</span>{" "}
                   <span className="wd-last-name">{user.lastName}</span>
                 </Link>
               </td>
