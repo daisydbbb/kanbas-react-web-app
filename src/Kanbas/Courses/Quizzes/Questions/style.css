@@ -1,0 +1,18 @@
+.question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-title,
+.question-type {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.question-points {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

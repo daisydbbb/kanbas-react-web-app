@@ -12,6 +12,8 @@ import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
 import Questions from "./Quizzes/Questions";
 import TrueFalseEditor from "./Quizzes/Questions/TrueFalseEditor";
+import MultipleChoiceEditor from "./Quizzes/Questions/MultipleChoiceEditor";
+import FillInBlankEditor from "./Quizzes/Questions/FillInBlankEditor";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
@@ -45,6 +47,14 @@ export default function Courses({ courses }: { courses: any[] }) {
               <Route
                 path="Quizzes/:qid/Questions/TF"
                 element={<TrueFalseEditor />}
+              />
+              <Route
+                path="Quizzes/:qid/Questions/MC"
+                element={<MultipleChoiceEditor />}
+              />
+              <Route
+                path="Quizzes/:qid/Questions/FB"
+                element={<FillInBlankEditor />}
               />
               <Route path="People" element={<PeopleTable />} />
               <Route path="People/:uid" element={<PeopleTable />} />

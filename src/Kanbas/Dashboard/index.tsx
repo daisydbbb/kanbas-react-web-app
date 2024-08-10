@@ -18,7 +18,7 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const enrolled = courses.filter((c) => c.enrolled === true);
+  // const enrolled = courses.filter((c) => c.enrolled === true);
 
   return (
     <div id="wd-dashboard">
@@ -69,11 +69,11 @@ export default function Dashboard({
           <hr />
         </div>
       </FacultyRoutes>
-      <h2 id="wd-dashboard-published">Enrolled Courses ({enrolled.length})</h2>
+      <h2 id="wd-dashboard-published">Enrolled Courses ({courses.length})</h2>
       <Link to="/Kanbas/Enroll">Enroll in courses</Link>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
-          {enrolled.map((course) => (
+          {courses.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <Link
                 to={`/Kanbas/Courses/${course.number}/Home`}
