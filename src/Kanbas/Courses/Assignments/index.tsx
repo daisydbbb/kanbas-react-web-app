@@ -10,6 +10,7 @@ import { deleteAssignment, setAssignments, updateAssignment } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
 import { useEffect } from "react";
+import FacultyRoutes from "../../FacultyRoutes";
 
 const getDate = (dateString: any) => {
   const date_string = dateString.split("T")[0];
@@ -135,18 +136,20 @@ export default function Assignments() {
                           </div>
                         </ul>
                       </div>
-                      <div
-                        id="assignment_status"
-                        className="col-auto assignment_status_pos"
-                      >
-                        <AssignmentControlButton
-                          assignment={assignment}
-                          cid={cid}
-                          deleteAssignment={(assignmentId: any) => {
-                            removeAssignment(assignmentId);
-                          }}
-                        />
-                      </div>
+                      <FacultyRoutes>
+                        <div
+                          id="assignment_status"
+                          className="col-auto assignment_status_pos"
+                        >
+                          <AssignmentControlButton
+                            assignment={assignment}
+                            cid={cid}
+                            deleteAssignment={(assignmentId: any) => {
+                              removeAssignment(assignmentId);
+                            }}
+                          />
+                        </div>
+                      </FacultyRoutes>
                     </div>
                   </div>
                 </li>

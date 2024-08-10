@@ -11,6 +11,7 @@ import Account from "./Account";
 import { Provider } from "react-redux";
 import Session from "./Account/Session";
 import ProtectedRoute from "./ProtectedRoutes";
+import AllCourses from "./AllCourses";
 
 export default function Kanbas() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -89,6 +90,7 @@ export default function Kanbas() {
                 />
                 <Route path="Calendar" element={<h1>Calendar</h1>} />
                 <Route path="Inbox" element={<h1>Inbox</h1>} />
+                <Route path="Enroll" element={<AllCourses />} />
               </Routes>
             </div>
           </div>

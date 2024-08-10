@@ -95,26 +95,32 @@ export default function Editor() {
           <IoEllipsisVertical className="fs-4 position-relative" />
         </button>
       </div>
-      <ul className="nav nav-tabs">
-        <li className="nav-item">
-          <a
-            className={`nav-link ${pathname.includes("Edit") ? "active" : ""}`}
-            aria-current="page"
-            href={`#Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`}
-          >
-            Details
-          </a>
-        </li>
-        <li className="nav-item">
-          <a
-            className={`nav-link ${pathname.includes("New") ? "active" : ""}`}
-            aria-current="page"
-            href={`#Kanbas/Courses/${cid}/Quizzes/${qid}/New`}
-          >
-            Questions
-          </a>
-        </li>
-      </ul>
+      <div>
+        <ul className="nav nav-tabs">
+          <li className="nav-item">
+            <a
+              className={`nav-link ${
+                pathname.includes("Edit") ? "active" : ""
+              }`}
+              aria-current="page"
+              href={`#Kanbas/Courses/${cid}/Quizzes/${qid}/Edit`}
+            >
+              Details
+            </a>
+          </li>
+          <li className="nav-item">
+            <a
+              className={`nav-link ${
+                pathname.includes("Questions") ? "active" : ""
+              }`}
+              aria-current="page"
+              href={`#Kanbas/Courses/${cid}/Quizzes/${qid}/Questions`}
+            >
+              Questions
+            </a>
+          </li>
+        </ul>
+      </div>
       <div id="wd-quizzes-editor" className="form-group">
         <div>
           <div id="wd-quiz-name" className="mb-3">

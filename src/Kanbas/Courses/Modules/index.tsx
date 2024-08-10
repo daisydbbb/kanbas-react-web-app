@@ -13,6 +13,7 @@ import {
 } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
+import FacultyRoutes from "../../FacultyRoutes";
 
 export default function Modules() {
   const { cid } = useParams();
@@ -42,16 +43,18 @@ export default function Modules() {
 
   return (
     <div id="wd-modules" className="row">
-      <div className="col-12 mb-4">
-        <ModulesControls
-          setModuleName={setModuleName}
-          moduleName={moduleName}
-          addModule={() => {
-            createModule({ name: moduleName, course: cid });
-            setModuleName("");
-          }}
-        />
-      </div>
+      <FacultyRoutes>
+        <div className="col-12 mb-4">
+          <ModulesControls
+            setModuleName={setModuleName}
+            moduleName={moduleName}
+            addModule={() => {
+              createModule({ name: moduleName, course: cid });
+              setModuleName("");
+            }}
+          />
+        </div>
+      </FacultyRoutes>
       <div className="row">
         <ul id="wd-modules" className="list-group rounded-0">
           {modules
@@ -75,14 +78,15 @@ export default function Modules() {
                       }}
                     />
                   )}
-
-                  <ModuleControlButtons
-                    moduleId={module._id}
-                    deleteModule={(moduleId) => {
-                      removeModule(moduleId);
-                    }}
-                    editModule={(moduleId) => dispatch(editModule(moduleId))}
-                  />
+                  <FacultyRoutes>
+                    <ModuleControlButtons
+                      moduleId={module._id}
+                      deleteModule={(moduleId) => {
+                        removeModule(moduleId);
+                      }}
+                      editModule={(moduleId) => dispatch(editModule(moduleId))}
+                    />
+                  </FacultyRoutes>
                 </div>
                 {module.lessons && (
                   <ul className="wd-lessons list-group rounded-0">

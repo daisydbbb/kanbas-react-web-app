@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import FacultyRoutes from "../FacultyRoutes";
 
 export default function Dashboard({
   courses,
@@ -17,6 +18,8 @@ export default function Dashboard({
   updateCourse: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const enrolled = courses.filter((c) => c.enrolled === true);
+
   return (
     <div id="wd-dashboard">
       <div>
@@ -30,57 +33,55 @@ export default function Dashboard({
         </h4>
       </div>
       <hr />
-      <div className="add-new-course">
-        <h5>
-          New Course
-          <button
-            className="btn btn-primary float-end"
-            id="wd-add-new-course-click"
-            onClick={addNewCourse}
-          >
-            Add
-          </button>
-          <button
-            className="btn btn-warning float-end me-2"
-            onClick={updateCourse}
-            id="wd-update-course-click"
-          >
-            Update
-          </button>
-        </h5>
-        <br />
-        <input
-          value={course.name}
-          className="form-control mb-2"
-          onChange={(e) => setCourse({ ...course, name: e.target.value })}
-        />
-        <textarea
-          value={course.description}
-          className="form-control"
-          onChange={(e) =>
-            setCourse({ ...course, description: e.target.value })
-          }
-        />
+      <FacultyRoutes>
+        <div className="add-new-course">
+          <h5>
+            Create New Course
+            <button
+              className="btn btn-primary float-end"
+              id="wd-add-new-course-click"
+              onClick={addNewCourse}
+            >
+              Add
+            </button>
+            <button
+              className="btn btn-warning float-end me-2"
+              onClick={updateCourse}
+              id="wd-update-course-click"
+            >
+              Update
+            </button>
+          </h5>
+          <br />
 
-        <hr />
-      </div>
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
-      <hr />
+          <input
+            value={course.name}
+            className="form-control mb-2"
+            onChange={(e) => setCourse({ ...course, name: e.target.value })}
+          />
+          <textarea
+            value={course.description}
+            className="form-control"
+            onChange={(e) =>
+              setCourse({ ...course, description: e.target.value })
+            }
+          />
+          <hr />
+        </div>
+      </FacultyRoutes>
+      <h2 id="wd-dashboard-published">Enrolled Courses ({enrolled.length})</h2>
+      <Link to="/Kanbas/Enroll">Enroll in courses</Link>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
-          {courses.map((course) => (
+          {enrolled.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <Link
-                to={`/Kanbas/Courses/${course._id}/Home`}
+                to={`/Kanbas/Courses/${course.number}/Home`}
                 className="text-decoration-none"
               >
                 <div className="card rounded-3 overflow-hidden">
                   <img
-                    src={
-                      course._id.length < 6
-                        ? `/images/dashboard_img/${course._id}.jpg`
-                        : "/images/reactjs.jpg"
-                    }
+                    src="/images/reactjs.jpg"
                     height="160px"
                     alt="course_pic"
                   />

@@ -10,11 +10,12 @@ import Grades from "./Grades";
 import PeopleTable from "./People/Table";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
-import NewQuestion from "./Quizzes/Questions/NewQuestion";
+import Questions from "./Quizzes/Questions";
+import TrueFalseEditor from "./Quizzes/Questions/TrueFalseEditor";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
-  const course = courses.find((course) => course._id === cid);
+  const course = courses.find((course) => course.number === cid);
   const { pathname } = useLocation();
   return (
     <div id="wd-courses">
@@ -40,7 +41,11 @@ export default function Courses({ courses }: { courses: any[] }) {
               <Route path="Quizzes" element={<Quizzes />} />
               <Route path="Quizzes/:qid" element={<QuizDetails />} />
               <Route path="Quizzes/:qid/Edit" element={<QuizEditor />} />
-              <Route path="Quizzes/:qid/New" element={<NewQuestion />} />
+              <Route path="Quizzes/:qid/Questions" element={<Questions />} />
+              <Route
+                path="Quizzes/:qid/Questions/TF"
+                element={<TrueFalseEditor />}
+              />
               <Route path="People" element={<PeopleTable />} />
               <Route path="People/:uid" element={<PeopleTable />} />
             </Routes>
