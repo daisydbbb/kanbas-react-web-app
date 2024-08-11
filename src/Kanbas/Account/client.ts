@@ -27,7 +27,6 @@ export const signout = async () => {
 };
 
 export const update = async (user: any) => {
-  console.log("here", user);
   const response = await axiosWithCredentials.put(
     `${USERS_API}/${user._id}`,
     user

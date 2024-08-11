@@ -22,30 +22,24 @@ export default function SearchAndAdd({ cid }: { cid: string | undefined }) {
           className="form-control no-border d-inline-block w-75 me-2"
         />
       </div>
-      <FacultyRoutes>
-        <button
-          id="wd-add-assignment"
-          className="btn btn-lg btn-danger float-end me-4"
-          onClick={handleAdd}
-        >
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Assignment
-        </button>
+      {/* <FacultyRoutes> */}
+      <button
+        id="wd-add-assignment"
+        className="btn btn-lg btn-danger float-end me-4"
+        onClick={handleAdd}
+      >
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+        Assignment
+      </button>
 
-        <button
-          id="wd-add-assignmen-group"
-          className="btn btn-lg btn-secondary me-1 float-end"
-        >
-          <FaPlus
-            className="position-relative me-2"
-            style={{ bottom: "1px" }}
-          />
-          Group
-        </button>
-      </FacultyRoutes>
+      <button
+        id="wd-add-assignmen-group"
+        className="btn btn-lg btn-secondary me-1 float-end"
+      >
+        <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
+        Group
+      </button>
+      {/* </FacultyRoutes> */}
     </div>
   );
 }

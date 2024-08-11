@@ -136,20 +136,20 @@ export default function Assignments() {
                           </div>
                         </ul>
                       </div>
-                      <FacultyRoutes>
-                        <div
-                          id="assignment_status"
-                          className="col-auto assignment_status_pos"
-                        >
-                          <AssignmentControlButton
-                            assignment={assignment}
-                            cid={cid}
-                            deleteAssignment={(assignmentId: any) => {
-                              removeAssignment(assignmentId);
-                            }}
-                          />
-                        </div>
-                      </FacultyRoutes>
+                      {/* <FacultyRoutes> */}
+                      <div
+                        id="assignment_status"
+                        className="col-auto assignment_status_pos"
+                      >
+                        <AssignmentControlButton
+                          assignment={assignment}
+                          cid={cid}
+                          deleteAssignment={(assignmentId: any) => {
+                            removeAssignment(assignmentId);
+                          }}
+                        />
+                      </div>
+                      {/* </FacultyRoutes> */}
                     </div>
                   </div>
                 </li>

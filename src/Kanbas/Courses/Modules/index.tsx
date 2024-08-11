@@ -43,18 +43,18 @@ export default function Modules() {
 
   return (
     <div id="wd-modules" className="row">
-      <FacultyRoutes>
-        <div className="col-12 mb-4">
-          <ModulesControls
-            setModuleName={setModuleName}
-            moduleName={moduleName}
-            addModule={() => {
-              createModule({ name: moduleName, course: cid });
-              setModuleName("");
-            }}
-          />
-        </div>
-      </FacultyRoutes>
+      {/* <FacultyRoutes> */}
+      <div className="col-12 mb-4">
+        <ModulesControls
+          setModuleName={setModuleName}
+          moduleName={moduleName}
+          addModule={() => {
+            createModule({ name: moduleName, course: cid });
+            setModuleName("");
+          }}
+        />
+      </div>
+      {/* </FacultyRoutes> */}
       <div className="row">
         <ul id="wd-modules" className="list-group rounded-0">
           {modules
@@ -78,15 +78,15 @@ export default function Modules() {
                       }}
                     />
                   )}
-                  <FacultyRoutes>
-                    <ModuleControlButtons
-                      moduleId={module._id}
-                      deleteModule={(moduleId) => {
-                        removeModule(moduleId);
-                      }}
-                      editModule={(moduleId) => dispatch(editModule(moduleId))}
-                    />
-                  </FacultyRoutes>
+                  {/* <FacultyRoutes> */}
+                  <ModuleControlButtons
+                    moduleId={module._id}
+                    deleteModule={(moduleId) => {
+                      removeModule(moduleId);
+                    }}
+                    editModule={(moduleId) => dispatch(editModule(moduleId))}
+                  />
+                  {/* </FacultyRoutes> */}
                 </div>
                 {module.lessons && (
                   <ul className="wd-lessons list-group rounded-0">
