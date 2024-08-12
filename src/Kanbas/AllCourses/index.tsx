@@ -33,7 +33,7 @@ export default function AllCourses() {
   };
   const handleSave = () => {
     updateCourse();
-    nagivate("/Kanbas/Dashboard");
+    nagivate("/Kanbas/Dashboard", { state: { courses } });
   };
 
   return (

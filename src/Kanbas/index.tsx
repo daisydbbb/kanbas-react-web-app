@@ -30,7 +30,7 @@ export default function Kanbas() {
   };
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [courses]);
 
   const addNewCourse = async () => {
     const newCourse = await client.createCourse(course);
@@ -76,6 +76,8 @@ export default function Kanbas() {
                         addNewCourse={addNewCourse}
                         deleteCourse={deleteCourse}
                         updateCourse={updateCourse}
+                        setCourses={setCourses}
+                        fetchCourses={fetchCourses}
                       />
                     </ProtectedRoute>
                   }

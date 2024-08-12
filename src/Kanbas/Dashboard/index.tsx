@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FacultyRoutes from "../FacultyRoutes";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Dashboard({
   courses,
@@ -9,6 +11,8 @@ export default function Dashboard({
   addNewCourse,
   deleteCourse,
   updateCourse,
+  setCourses,
+  fetchCourses,
 }: {
   courses: any[];
   course: any;
@@ -16,9 +20,20 @@ export default function Dashboard({
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
+  setCourses: (courses: any) => void;
+  fetchCourses: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  // const enrolled = courses.filter((c) => c.enrolled === true);
+  const enrolled = courses.filter((c) => c.enrolled === true);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state && location.state.courses) {
+      setCourses(location.state.courses);
+    } else {
+      fetchCourses();
+    }
+  }, []);
 
   return (
     <div id="wd-dashboard">
@@ -69,11 +84,11 @@ export default function Dashboard({
           <hr />
         </div>
       </FacultyRoutes>
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
-      {/* <Link to="/Kanbas/Enroll">Enroll in courses</Link> */}
+      <h2 id="wd-dashboard-published">Enrolled Courses ({enrolled.length})</h2>
+      <Link to="/Kanbas/Enroll">Enroll in courses</Link>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
-          {courses.map((course) => (
+          {enrolled.map((course) => (
             <div className="wd-dashboard-course col" style={{ width: "300px" }}>
               <Link
                 to={`/Kanbas/Courses/${course.number}/Home`}
@@ -102,34 +117,35 @@ export default function Dashboard({
                     >
                       {course.description}
                     </p>
-                    <Link
+                    {/* <Link
                       to={`/Kanbas/Courses/${course._id}/Home`}
                       className="btn btn-primary"
                     >
                       Go
-                    </Link>
+                    </Link> */}
+                    <FacultyRoutes>
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          deleteCourse(course._id);
+                        }}
+                        className="btn btn-danger float-end"
+                        id="wd-delete-course-click"
+                      >
+                        Delete
+                      </button>
 
-                    <button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        deleteCourse(course._id);
-                      }}
-                      className="btn btn-danger float-end"
-                      id="wd-delete-course-click"
-                    >
-                      Delete
-                    </button>
-
-                    <button
-                      id="wd-edit-course-click"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        setCourse(course);
-                      }}
-                      className="btn btn-warning me-2 float-end"
-                    >
-                      Edit
-                    </button>
+                      <button
+                        id="wd-edit-course-click"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          setCourse(course);
+                        }}
+                        className="btn btn-warning me-2 float-end"
+                      >
+                        Edit
+                      </button>
+                    </FacultyRoutes>
                   </div>
                 </div>
               </Link>

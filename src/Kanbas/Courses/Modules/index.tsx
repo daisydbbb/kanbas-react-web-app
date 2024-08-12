@@ -78,15 +78,15 @@ export default function Modules() {
                       }}
                     />
                   )}
-                  {/* <FacultyRoutes> */}
-                  <ModuleControlButtons
-                    moduleId={module._id}
-                    deleteModule={(moduleId) => {
-                      removeModule(moduleId);
-                    }}
-                    editModule={(moduleId) => dispatch(editModule(moduleId))}
-                  />
-                  {/* </FacultyRoutes> */}
+                  <FacultyRoutes>
+                    <ModuleControlButtons
+                      moduleId={module._id}
+                      deleteModule={(moduleId) => {
+                        removeModule(moduleId);
+                      }}
+                      editModule={(moduleId) => dispatch(editModule(moduleId))}
+                    />
+                  </FacultyRoutes>
                 </div>
                 {module.lessons && (
                   <ul className="wd-lessons list-group rounded-0">
