@@ -4,10 +4,10 @@ import * as client from "./client";
 import { setQuizzes } from "./reducer";
 import { useEffect } from "react";
 import { FaPencil } from "react-icons/fa6";
+import FacultyRoutes from "../../FacultyRoutes";
 
 const getDate = (dateString: any) => {
-  const date_string = dateString.split("T")[0];
-  const date = new Date(date_string);
+  const date = new Date(dateString);
   const monthNames = [
     "Jan",
     "Feb",
@@ -26,14 +26,6 @@ const getDate = (dateString: any) => {
   const month = monthNames[date.getUTCMonth()];
   const formattedDate = `${month} ${day}`;
   return formattedDate;
-};
-const getTime = (dateString: any) => {
-  const timeString = dateString.split("T")[1];
-  if (timeString > "11:59") {
-    return timeString + "pm";
-  } else {
-    return timeString + "am";
-  }
 };
 
 export default function Details() {
@@ -63,25 +55,35 @@ export default function Details() {
         <button
           type="button"
           className="btn btn-secondary me-2"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/Kanbas/Courses/${currQuiz.course}/Quizzes`)}
         >
           Back
         </button>
-        <button type="button" className="btn btn-secondary me-2">
-          Preview
-        </button>
-        <button
-          type="button"
-          className="btn btn-secondary me-2"
-          onClick={() =>
-            navigate(
-              `/Kanbas/Courses/${currQuiz.course}/Quizzes/${currQuiz._id}/Edit`
-            )
-          }
-        >
-          <FaPencil className="text-secondary me-2" />
-          Edit
-        </button>
+        <FacultyRoutes>
+          <button
+            type="button"
+            className="btn btn-secondary me-2"
+            onClick={() =>
+              navigate(
+                `/Kanbas/Courses/${currQuiz.course}/Quizzes/${currQuiz._id}/Preview`
+              )
+            }
+          >
+            Preview
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary me-2"
+            onClick={() =>
+              navigate(
+                `/Kanbas/Courses/${currQuiz.course}/Quizzes/${currQuiz._id}/Edit`
+              )
+            }
+          >
+            <FaPencil className="text-secondary me-2" />
+            Edit
+          </button>
+        </FacultyRoutes>
       </div>
       <hr />
       <div>
@@ -113,10 +115,10 @@ export default function Details() {
           <div className="col-sm-7">{currQuiz.time}</div>
 
           <div className="col-sm-5 d-flex justify-content-end mb-2">
-            <b>Multiple Attempts</b>
+            <b>Remaining Attempts</b>
           </div>
           <div className="col-sm-7">
-            {currQuiz.multiple_attempts ? currQuiz.attempts : "No"}
+            {currQuiz.attempts > 0 ? currQuiz.attempts : "No"}
           </div>
 
           <div className="col-sm-5 d-flex justify-content-end mb-2">
@@ -179,27 +181,50 @@ export default function Details() {
         </thead>
         <tbody>
           <tr>
-            <td>
-              {currQuiz.due && getDate(currQuiz.due)}{" "}
-              {currQuiz.due && getTime(currQuiz.due)}
-            </td>
+            <td>{currQuiz.due && `${getDate(currQuiz.due)} 11:59pm`}</td>
             <td>Everyone</td>
             <td>
-              {currQuiz.available_from && getDate(currQuiz.available_from)}{" "}
-              {currQuiz.available_from && getTime(currQuiz.available_from)}
+              {currQuiz.available_from &&
+                `${getDate(currQuiz.available_from)} 11:59pm`}
             </td>
             <td>
-              {currQuiz.available_to && getDate(currQuiz.available_to)}{" "}
-              {currQuiz.available_to && getTime(currQuiz.available_to)}
+              {currQuiz.available_to &&
+                `${getDate(currQuiz.available_to)} 11:59pm`}
             </td>
           </tr>
         </tbody>
       </table>
       <br />
       <div className="d-flex center-item">
-        <button type="button" className="btn btn-danger">
-          Start the Quiz
-        </button>
+        {currQuiz.published ? (
+          currQuiz.attempts > 0 ? (
+            <button
+              type="button"
+              className="btn btn-danger"
+              style={{ borderRadius: 5 }}
+              onClick={() => navigate(`TakeQuiz`)}
+            >
+              Start the Quiz
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-secondary"
+              style={{ borderRadius: 5 }}
+              onClick={() => navigate(`Preview`)}
+            >
+              View Lastest Attempt
+            </button>
+          )
+        ) : (
+          <button
+            type="button"
+            className="btn btn-secondary"
+            style={{ borderRadius: 5 }}
+          >
+            Start the Quiz
+          </button>
+        )}
       </div>
     </div>
   );

@@ -43,24 +43,27 @@ export default function Modules() {
 
   return (
     <div id="wd-modules" className="row">
-      {/* <FacultyRoutes> */}
-      <div className="col-12 mb-4">
-        <ModulesControls
-          setModuleName={setModuleName}
-          moduleName={moduleName}
-          addModule={() => {
-            createModule({ name: moduleName, course: cid });
-            setModuleName("");
-          }}
-        />
-      </div>
-      {/* </FacultyRoutes> */}
+      <FacultyRoutes>
+        <div className="col-12 mb-4">
+          <ModulesControls
+            setModuleName={setModuleName}
+            moduleName={moduleName}
+            addModule={() => {
+              createModule({ name: moduleName, course: cid });
+              setModuleName("");
+            }}
+          />
+        </div>
+      </FacultyRoutes>
       <div className="row">
         <ul id="wd-modules" className="list-group rounded-0">
           {modules
             .filter((module: any) => module.course === cid)
             .map((module: any) => (
-              <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+              <li
+                className="wd-module list-group-item p-0 mb-5 fs-5 border-gray"
+                key={module._id}
+              >
                 <div className="wd-title p-3 ps-2 bg-secondary">
                   <BsGripVertical className="me-2 fs-3" />
                   {!module.editing && module.name}

@@ -41,7 +41,7 @@ export default function AllCourses() {
       <h1>Choose Courses for Enrollment</h1>
       <div style={{ marginLeft: 10 }}>
         {courses.map((course: any) => (
-          <div>
+          <div key={course.name}>
             <input
               type="checkbox"
               defaultChecked={course.enrolled}

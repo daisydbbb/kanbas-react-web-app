@@ -138,8 +138,6 @@ export default function Profile() {
               onChange={(e) => setProfile({ ...profile, role: e.target.value })}
               style={{ marginLeft: 10 }}
             >
-              <option value="USER">User</option>
-              <option value="ADMIN">Admin</option>
               <option value="FACULTY">Faculty</option>
               <option value="STUDENT">Student</option>
             </select>

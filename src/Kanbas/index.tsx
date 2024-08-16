@@ -30,11 +30,16 @@ export default function Kanbas() {
   };
   useEffect(() => {
     fetchCourses();
-  }, [courses]);
+  }, []);
 
   const addNewCourse = async () => {
-    const newCourse = await client.createCourse(course);
-    setCourses([...courses, newCourse]);
+    try {
+      const newCourse = await client.createCourse(course);
+      setCourses([...courses, newCourse]);
+    } catch (err) {
+      alert(err);
+      console.error(err);
+    }
   };
   const deleteCourse = async (courseId: string) => {
     await client.deleteCourse(courseId);

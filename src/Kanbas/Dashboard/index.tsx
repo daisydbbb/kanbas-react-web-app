@@ -84,12 +84,17 @@ export default function Dashboard({
           <hr />
         </div>
       </FacultyRoutes>
+
       <h2 id="wd-dashboard-published">Enrolled Courses ({enrolled.length})</h2>
       <Link to="/Kanbas/Enroll">Enroll in courses</Link>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
           {enrolled.map((course) => (
-            <div className="wd-dashboard-course col" style={{ width: "300px" }}>
+            <div
+              className="wd-dashboard-course col"
+              style={{ width: "300px" }}
+              key={course._id}
+            >
               <Link
                 to={`/Kanbas/Courses/${course.number}/Home`}
                 className="text-decoration-none"
@@ -117,12 +122,6 @@ export default function Dashboard({
                     >
                       {course.description}
                     </p>
-                    {/* <Link
-                      to={`/Kanbas/Courses/${course._id}/Home`}
-                      className="btn btn-primary"
-                    >
-                      Go
-                    </Link> */}
                     <FacultyRoutes>
                       <button
                         onClick={(event) => {

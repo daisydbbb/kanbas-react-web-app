@@ -7,6 +7,7 @@ import * as client from "./client";
 import { useEffect } from "react";
 import { setQuizzes } from "./reducer";
 import QuizControlButton from "./QuizControlButton";
+import { useLocation } from "react-router";
 
 const get_now = () => {
   const today = new Date();
@@ -19,8 +20,7 @@ const get_now = () => {
   return formattedDate;
 };
 const getDate = (dateString: any) => {
-  const date_string = dateString.split("T")[0];
-  const date = new Date(date_string);
+  const date = new Date(dateString);
   const monthNames = [
     "Jan",
     "Feb",
@@ -40,22 +40,14 @@ const getDate = (dateString: any) => {
   const formattedDate = `${month} ${day}`;
   return formattedDate;
 };
-const getTime = (dateString: any) => {
-  const timeString = dateString.split("T")[1];
-  if (timeString > "11:59") {
-    return timeString + "pm";
-  } else {
-    return timeString + "am";
-  }
-};
 
 export default function Quizzes() {
   const { cid } = useParams();
   const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const time_now = get_now();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   const fetchQuizzes = async () => {
     const quizzes = await client.fetchQuizzes(cid as string);
@@ -63,12 +55,30 @@ export default function Quizzes() {
   };
   useEffect(() => {
     fetchQuizzes();
-  }, [quizzes]);
+  }, []);
 
   return (
     <div id="wd-quizzes" className="row">
       <div id="wd-search-quiz" className="col-12 mb-4 ">
         <SearchAndAdd cid={cid} />
+        <div className="float-end">
+          {currentUser &&
+            (currentUser.role === "STUDENT" ? (
+              <button
+                className="btn btn-md btn-secondary"
+                style={{ borderRadius: 0 }}
+              >
+                Student View
+              </button>
+            ) : (
+              <button
+                className="btn btn-md btn-secondary"
+                style={{ borderRadius: 0 }}
+              >
+                Faculty View
+              </button>
+            ))}
+        </div>
       </div>
 
       <div className="row">
@@ -82,55 +92,61 @@ export default function Quizzes() {
             {quizzes
               .filter((quiz: any) => quiz.course === cid)
               .map((quiz: any) => (
-                <li className="wd-quiz-list-item list-group-item p-3 ps-1 left-green">
-                  <div className="container">
-                    <div className="row justify-content-md-center">
-                      <div id="quiz-left-icons" className="col-auto d-flex">
-                        <IoRocketOutline
-                          style={{ color: "green" }}
-                          className="me-2 fs-3 mt-3"
-                        />
-                      </div>
-                      <div id="assignment-content" className="col">
-                        <ul className="list-unstyled mb-0">
-                          <div
-                            style={{ fontSize: "24px" }}
-                            onClick={() =>
-                              navigate(
-                                `/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`
-                              )
-                            }
-                          >
-                            {quiz.title}
-                          </div>
-                          <div>
-                            {time_now < quiz.available_from ? (
-                              <>
-                                <b>Not available until</b>{" "}
-                                {quiz.available_from &&
-                                  getDate(quiz.available_from)}{" "}
-                                at{" "}
-                                {quiz.available_from &&
-                                  getTime(quiz.available_from)}
-                              </>
-                            ) : time_now > quiz.available_to ? (
-                              <b>Closed</b>
-                            ) : (
-                              <b>Available</b>
-                            )}{" "}
-                            | <b>Due</b> {quiz.due && getDate(quiz.due)} at{" "}
-                            {quiz.due && getTime(quiz.due)} |{" "}
-                            {quiz.score === "" ? "" : <b>{quiz.score}/</b>}
-                            {quiz.points} pts | {quiz.question_number} Questions
-                          </div>
-                        </ul>
-                      </div>
-                      <div id="quiz_status" className="col-auto mt-3">
-                        <QuizControlButton quiz={quiz} />
+                <div key={quiz._id}>
+                  <li className="wd-quiz-list-item list-group-item p-3 ps-1 left-green">
+                    <div className="container">
+                      <div className="row justify-content-md-center">
+                        <div id="quiz-left-icons" className="col-auto d-flex">
+                          <IoRocketOutline
+                            style={{ color: "green" }}
+                            className="me-2 fs-3 mt-3"
+                          />
+                        </div>
+                        <div id="assignment-content" className="col">
+                          <ul className="list-unstyled mb-0">
+                            <div
+                              style={{ fontSize: "24px" }}
+                              onClick={() =>
+                                navigate(
+                                  `/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`
+                                )
+                              }
+                            >
+                              {quiz.title}
+                            </div>
+                            <div>
+                              {time_now < quiz.available_from ? (
+                                <>
+                                  <b>Not available until</b>{" "}
+                                  {quiz.available_from &&
+                                    `${getDate(quiz.available_from)} 11:59pm`}
+                                </>
+                              ) : time_now > quiz.available_to ? (
+                                <b>Closed</b>
+                              ) : (
+                                <b>Available</b>
+                              )}{" "}
+                              | <b>Due</b>{" "}
+                              {quiz.due && `${getDate(quiz.due)} 11:59pm`} |{" "}
+                              {currentUser &&
+                              currentUser.role === "STUDENT" &&
+                              quiz.score ? (
+                                <b>{quiz.score}/</b>
+                              ) : (
+                                ""
+                              )}
+                              {quiz.points} pts | {quiz.question_number}{" "}
+                              Questions
+                            </div>
+                          </ul>
+                        </div>
+                        <div id="quiz_status" className="col-auto mt-3">
+                          <QuizControlButton quiz={quiz} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                </div>
               ))}
           </ul>
         </li>

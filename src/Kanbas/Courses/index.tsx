@@ -10,10 +10,12 @@ import Grades from "./Grades";
 import PeopleTable from "./People/Table";
 import { Navigate, Route, Routes, useParams, useLocation } from "react-router";
 import { FaAlignJustify } from "react-icons/fa";
-import Questions from "./Quizzes/Questions";
-import TrueFalseEditor from "./Quizzes/Questions/TrueFalseEditor";
-import MultipleChoiceEditor from "./Quizzes/Questions/MultipleChoiceEditor";
-import FillInBlankEditor from "./Quizzes/Questions/FillInBlankEditor";
+import Questions from "./Questions";
+import TrueFalseEditor from "./Questions/TrueFalseEditor";
+import MultipleChoiceEditor from "./Questions/MultipleChoiceEditor";
+import FillInBlankEditor from "./Questions/FillInBlankEditor";
+import Scores from "./Scores";
+import Preview from "./Preview";
 
 export default function Courses({ courses }: { courses: any[] }) {
   const { cid } = useParams();
@@ -44,16 +46,18 @@ export default function Courses({ courses }: { courses: any[] }) {
               <Route path="Quizzes/:qid" element={<QuizDetails />} />
               <Route path="Quizzes/:qid/Edit" element={<QuizEditor />} />
               <Route path="Quizzes/:qid/Questions" element={<Questions />} />
+              <Route path="Quizzes/:qid/TakeQuiz" element={<Scores />} />
+              <Route path="Quizzes/:qid/Preview" element={<Preview />} />
               <Route
-                path="Quizzes/:qid/Questions/TF"
+                path="Quizzes/:qid/Questions/TF/:questionId"
                 element={<TrueFalseEditor />}
               />
               <Route
-                path="Quizzes/:qid/Questions/MC"
+                path="Quizzes/:qid/Questions/MC/:questionId"
                 element={<MultipleChoiceEditor />}
               />
               <Route
-                path="Quizzes/:qid/Questions/FB"
+                path="Quizzes/:qid/Questions/FB/:questionId"
                 element={<FillInBlankEditor />}
               />
               <Route path="People" element={<PeopleTable />} />

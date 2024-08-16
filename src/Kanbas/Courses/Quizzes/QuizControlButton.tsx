@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as client from "./client";
 import { deleteQuiz, updateQuiz } from "./reducer";
+import FacultyRoutes from "../../FacultyRoutes";
 
 export default function QuizControlButton({ quiz }: { quiz: any }) {
   const navigate = useNavigate();
@@ -48,48 +49,50 @@ export default function QuizControlButton({ quiz }: { quiz: any }) {
       ) : (
         <FaBan className="text-danger me-2" />
       )}
-      <div className="dropdown d-inline">
-        <IoEllipsisVertical
-          className="fs-4 dropdown-toggle "
-          data-bs-toggle="dropdown"
-        />
-        <ul className="dropdown-menu">
-          <li
-            className="dropdown-item"
-            onClick={() =>
-              navigate(`/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`)
-            }
-          >
-            <FaRegEdit className="text-secondary me-2 mb-1" />
-            Edit
-          </li>
-          <li className="dropdown-item" onClick={handleDelete}>
-            <FaTrash className="text-secondary me-2 mb-1" />
-            Delete
-          </li>
-          <li className="dropdown-item">
-            {quiz.published ? (
-              <div onClick={publishQuiz}>
-                <IoMdDownload className="text-secondary me-2 mb-1" />
-                Unpublish
-              </div>
-            ) : (
-              <div onClick={publishQuiz}>
-                <MdUpload className="text-secondary me-2 mb-1" />
-                Publish
-              </div>
-            )}
-          </li>
-          <li className="dropdown-item">
-            <FaCopy className="text-secondary me-2 mb-1" />
-            Copy (optional)
-          </li>
-          <li className="dropdown-item">
-            <FaSortAmountDown className="text-secondary me-2 mb-1" />
-            Sort (optional)
-          </li>
-        </ul>
-      </div>
+      <FacultyRoutes>
+        <div className="dropdown d-inline">
+          <IoEllipsisVertical
+            className="fs-4 dropdown-toggle "
+            data-bs-toggle="dropdown"
+          />
+          <ul className="dropdown-menu">
+            <li
+              className="dropdown-item"
+              onClick={() =>
+                navigate(`/Kanbas/Courses/${quiz.course}/Quizzes/${quiz._id}`)
+              }
+            >
+              <FaRegEdit className="text-secondary me-2 mb-1" />
+              Edit
+            </li>
+            <li className="dropdown-item" onClick={handleDelete}>
+              <FaTrash className="text-secondary me-2 mb-1" />
+              Delete
+            </li>
+            <li className="dropdown-item">
+              {quiz.published ? (
+                <div onClick={publishQuiz}>
+                  <IoMdDownload className="text-secondary me-2 mb-1" />
+                  Unpublish
+                </div>
+              ) : (
+                <div onClick={publishQuiz}>
+                  <MdUpload className="text-secondary me-2 mb-1" />
+                  Publish
+                </div>
+              )}
+            </li>
+            <li className="dropdown-item">
+              <FaCopy className="text-secondary me-2 mb-1" />
+              Copy (optional)
+            </li>
+            <li className="dropdown-item">
+              <FaSortAmountDown className="text-secondary me-2 mb-1" />
+              Sort (optional)
+            </li>
+          </ul>
+        </div>
+      </FacultyRoutes>
     </div>
   );
 }
