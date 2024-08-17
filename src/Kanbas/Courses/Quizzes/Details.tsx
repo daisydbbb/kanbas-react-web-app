@@ -36,6 +36,12 @@ export default function Details() {
   const currQuiz = quizzes.filter(
     (quiz: any) => quiz.course === cid && quiz._id === qid
   )[0];
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+
+  let usedAttempts = 0;
+  if (currentUser.scores && qid && qid in currentUser.scores) {
+    usedAttempts = currentUser.scores[qid]?.usedAttempts || 0;
+  }
 
   const fetchQuizzes = async () => {
     const quizzes = await client.fetchQuizzes(cid as string);
@@ -115,11 +121,14 @@ export default function Details() {
           <div className="col-sm-7">{currQuiz.time}</div>
 
           <div className="col-sm-5 d-flex justify-content-end mb-2">
+            <b>Multiple Attempts</b>
+          </div>
+          <div className="col-sm-7">{currQuiz.attempts > 1 ? "Yes" : "No"}</div>
+
+          <div className="col-sm-5 d-flex justify-content-end mb-2">
             <b>Remaining Attempts</b>
           </div>
-          <div className="col-sm-7">
-            {currQuiz.attempts > 0 ? currQuiz.attempts : "No"}
-          </div>
+          <div className="col-sm-7">{currQuiz.attempts - usedAttempts}</div>
 
           <div className="col-sm-5 d-flex justify-content-end mb-2">
             <b>View Response</b>
@@ -195,37 +204,51 @@ export default function Details() {
         </tbody>
       </table>
       <br />
-      <div className="d-flex center-item">
-        {currQuiz.published ? (
-          currQuiz.attempts > 0 ? (
-            <button
-              type="button"
-              className="btn btn-danger"
-              style={{ borderRadius: 5 }}
-              onClick={() => navigate(`TakeQuiz`)}
-            >
-              Start the Quiz
-            </button>
+      {currentUser && currentUser.role === "STUDENT" && (
+        <div className="d-flex center-item">
+          {currQuiz.published ? (
+            currQuiz.attempts - usedAttempts > 0 ? (
+              <button
+                type="button"
+                className="btn btn-danger"
+                style={{ borderRadius: 5 }}
+                onClick={() => navigate(`TakeQuiz`)}
+              >
+                Start the Quiz
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                style={{ borderRadius: 5 }}
+                onClick={() => navigate(`Preview`)}
+              >
+                View Lastest Attempt
+              </button>
+            )
           ) : (
             <button
               type="button"
               className="btn btn-secondary"
               style={{ borderRadius: 5 }}
-              onClick={() => navigate(`Preview`)}
             >
-              View Lastest Attempt
+              Start the Quiz
             </button>
-          )
-        ) : (
+          )}
+        </div>
+      )}
+      {currentUser && currentUser.role === "FACULTY" && (
+        <div className="d-flex center-item">
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-danger"
             style={{ borderRadius: 5 }}
+            onClick={() => navigate(`TakeQuiz`)}
           >
             Start the Quiz
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

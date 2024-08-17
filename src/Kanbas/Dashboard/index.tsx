@@ -1,50 +1,45 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import FacultyRoutes from "../FacultyRoutes";
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 
 export default function Dashboard({
-  courses,
+  // courses,
   course,
   setCourse,
   addNewCourse,
   deleteCourse,
   updateCourse,
-  setCourses,
-  fetchCourses,
-}: {
-  courses: any[];
+}: // setCourses,
+// fetchCourses,
+{
+  // courses: any[];
   course: any;
   setCourse: (course: any) => void;
   addNewCourse: () => void;
   deleteCourse: (course: any) => void;
   updateCourse: () => void;
-  setCourses: (courses: any) => void;
-  fetchCourses: () => void;
+  // setCourses: (courses: any) => void;
+  // fetchCourses: () => void;
 }) {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const enrolled = courses.filter((c) => c.enrolled === true);
-  const location = useLocation();
+  const enrolled = currentUser.enrolled_courses;
 
-  useEffect(() => {
-    if (location.state && location.state.courses) {
-      setCourses(location.state.courses);
-    } else {
-      fetchCourses();
-    }
-  }, []);
+  if (!currentUser) {
+    return <>Loading...</>;
+  }
 
   return (
     <div id="wd-dashboard">
       <div>
         <h1 id="wd-dashboard-title">Dashboard</h1>
         <h4>
+          Hi{" "}
           {currentUser && (
             <>
               {currentUser.username} ({currentUser.role})
             </>
-          )}
+          )}{" "}
+          👋
         </h4>
       </div>
       <hr />
@@ -89,7 +84,7 @@ export default function Dashboard({
       <Link to="/Kanbas/Enroll">Enroll in courses</Link>
       <div id="wd-dashboard-courses" className="row">
         <div className="row row-cols-1 row-cols-md-5 g-4 mt-2">
-          {enrolled.map((course) => (
+          {enrolled.map((course: any) => (
             <div
               className="wd-dashboard-course col"
               style={{ width: "300px" }}

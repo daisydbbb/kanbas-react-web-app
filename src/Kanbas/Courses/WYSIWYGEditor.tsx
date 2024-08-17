@@ -21,10 +21,9 @@ function WYSIWYGEditor({
   }, [form.instructions]);
 
   const handleChange = (content: string) => {
-    const strippedContent = content.replace(/^<p>(.*?)<\/p>$/, "$1");
     const updatedForm = {
       ...form,
-      instructions: strippedContent,
+      instructions: content,
     };
     setEditorContent(content);
     setForm(updatedForm);

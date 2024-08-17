@@ -4,6 +4,7 @@ import SearchAndAdd from "./SearchAndAdd";
 import { useSelector, useDispatch } from "react-redux";
 import { IoRocketOutline } from "react-icons/io5";
 import * as client from "./client";
+import * as client1 from "../../Account/client";
 import { useEffect } from "react";
 import { setQuizzes } from "./reducer";
 import QuizControlButton from "./QuizControlButton";
@@ -53,6 +54,7 @@ export default function Quizzes() {
     const quizzes = await client.fetchQuizzes(cid as string);
     dispatch(setQuizzes(quizzes));
   };
+
   useEffect(() => {
     fetchQuizzes();
   }, []);

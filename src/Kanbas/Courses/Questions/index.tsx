@@ -98,7 +98,9 @@ export default function Questions() {
                 className="card-text d-flex"
                 style={{ marginLeft: 10, fontSize: 18 }}
               >
-                {q.description}
+                {q.description &&
+                  q.description.includes("<p>") &&
+                  q.description.replace(/<\/?p>/g, "")}
               </p>
               <div className="form-check">
                 {q.options &&

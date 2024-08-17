@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import * as client from "../Questions/client";
 import * as client1 from "../Quizzes/client";
-import { setQuestions, updateQuestion } from "../Questions/reducer";
+import * as client2 from "../../Account/client";
+import { setQuestions } from "../Questions/reducer";
 import { FaCheck } from "react-icons/fa";
 import { FaRegQuestionCircle } from "react-icons/fa";
-import { setQuizzes, updateQuiz } from "../Quizzes/reducer";
+import { setQuizzes } from "../Quizzes/reducer";
+import { setCurrentUser } from "../../Account/reducer";
 
 const get_now = () => {
   const today = new Date();
@@ -21,37 +23,30 @@ const get_now = () => {
 export default function Score() {
   const { cid, qid } = useParams();
   const { questions } = useSelector((state: any) => state.questionsReducer);
+  const { quizzes } = useSelector((state: any) => state.quizzesReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
-  const { quizzes } = useSelector((state: any) => state.quizzesReducer);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [startTime, setStartTime] = useState("");
   const [userAnswers, setUserAnswers] = useState<string[]>(
     new Array(questions.length).fill("")
   );
+  const [user, setUser] = useState(currentUser);
 
   const [loading, setLoading] = useState(true);
 
   const fetchQuestions = async () => {
-    try {
-      const fetchedQuestions = await client.fetchQuestions(
-        cid as string,
-        qid as string
-      );
-      dispatch(setQuestions(fetchedQuestions));
-    } catch (error) {
-      console.error("Failed to fetch questions:", error);
-    }
+    const fetchedQuestions = await client.fetchQuestions(
+      cid as string,
+      qid as string
+    );
+    dispatch(setQuestions(fetchedQuestions));
   };
   const fetchQuizzes = async () => {
-    try {
-      const fetchedQuizzes = await client1.fetchQuizzes(cid as string);
-      dispatch(setQuizzes(fetchedQuizzes));
-    } catch (error) {
-      console.error("Failed to fetch quizzes:", error);
-    }
+    const fetchedQuizzes = await client1.fetchQuizzes(cid as string);
+    dispatch(setQuizzes(fetchedQuizzes));
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -77,16 +72,6 @@ export default function Score() {
     setUserAnswers(newAnswers);
   };
 
-  const saveQuestion = async (question: any) => {
-    const status = await client.updateQuestion(question);
-    dispatch(updateQuestion(question));
-  };
-
-  const saveQuiz = async (quiz: any) => {
-    const status = await client1.updateQuiz(quiz);
-    dispatch(updateQuiz(quiz));
-  };
-
   const handleSubmit = () => {
     let score = 0;
     questions.forEach((question: any, index: number) => {
@@ -101,30 +86,51 @@ export default function Score() {
       }
     });
 
-    if (currentUser && currentUser.role === "STUDENT") {
-      const reducedAttempts = currQuiz.attempts > 0 ? currQuiz.attempts - 1 : 0;
-      const newQuiz = {
-        ...currQuiz,
-        score: score,
-        attempts: reducedAttempts,
-      };
-      saveQuiz(newQuiz);
+    const records: { [key: string]: any } = {};
+    questions.forEach((question: any, index: number) => {
+      records[question._id] = userAnswers[index];
+    });
 
-      questions.forEach((q: any, index: number) => {
-        const updatedQuestion = { ...q, student_answer: userAnswers[index] };
-        saveQuestion(updatedQuestion);
-      });
+    if (user.role === "STUDENT" && qid) {
+      const updatedScores = user.scores || {};
+      if (!(qid in updatedScores)) {
+        const newRecord = { ...records, usedAttempts: 1, score: score };
+        const updatedUser = {
+          ...user,
+          scores: { ...updatedScores, [qid]: newRecord },
+        };
+        console.log(updatedUser);
+        client2.update(updatedUser);
+        dispatch(setCurrentUser(updatedUser));
+      } else {
+        const prevAttempts = updatedScores[qid]?.usedAttempts || 0;
+        const newRecord = {
+          ...records,
+          usedAttempts: prevAttempts + 1,
+          score: score,
+        };
+        const updatedUser = {
+          ...user,
+          scores: { ...updatedScores, [qid]: newRecord },
+        };
+        console.log(updatedUser);
+        client2.update(updatedUser);
+        dispatch(setCurrentUser(updatedUser));
+      }
     }
-    if (currentUser && currentUser.role === "FACULTY") {
-      const newQuiz = {
-        ...currQuiz,
-      };
-      saveQuiz(newQuiz);
 
-      questions.forEach((q: any, index: number) => {
-        const updatedQuestion = { ...q, faculty_answer: userAnswers[index] };
-        saveQuestion(updatedQuestion);
-      });
+    if (user.role === "FACULTY" && qid) {
+      const updatedScores = user.scores || {};
+
+      const newRecord = { ...records, usedAttempts: 0, score: score };
+      const updatedUser = {
+        ...user,
+        scores: { ...updatedScores, [qid]: newRecord },
+      };
+
+      console.log(updatedUser);
+      client2.update(updatedUser);
+      dispatch(setCurrentUser(updatedUser));
     }
 
     navigate(`/Kanbas/Courses/${cid}/Quizzes`);
@@ -194,7 +200,7 @@ export default function Score() {
 
           <p>
             {questions[currentQuestion] &&
-              questions[currentQuestion].description}
+              questions[currentQuestion].description.replace(/<\/?p>/g, "")}
           </p>
 
           {questions[currentQuestion] &&

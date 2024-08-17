@@ -8,13 +8,16 @@ import * as client from "./Courses/client";
 import { useState, useEffect } from "react";
 import store from "./store";
 import Account from "./Account";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import Session from "./Account/Session";
 import ProtectedRoute from "./ProtectedRoutes";
 import AllCourses from "./AllCourses";
+import { useSelector } from "react-redux";
+import { setCourses } from "./Courses/reducer";
 
 export default function Kanbas() {
-  const [courses, setCourses] = useState<any[]>([]);
+  // const [courses, setCourses] = useState<any[]>([]);
+
   const [course, setCourse] = useState<any>({
     _id: "0",
     name: "New Course",
@@ -24,38 +27,32 @@ export default function Kanbas() {
     image: "/images/reactjs.jpg",
     description: "New Description",
   });
-  const fetchCourses = async () => {
-    const courses = await client.fetchAllCourses();
-    setCourses(courses);
-  };
-  useEffect(() => {
-    fetchCourses();
-  }, []);
 
   const addNewCourse = async () => {
     try {
       const newCourse = await client.createCourse(course);
-      setCourses([...courses, newCourse]);
+      // setCourses([...courses, newCourse]);
+      alert("New course added!");
     } catch (err) {
-      alert(err);
+      alert("Duplicate name!");
       console.error(err);
     }
   };
   const deleteCourse = async (courseId: string) => {
     await client.deleteCourse(courseId);
-    setCourses(courses.filter((course) => course._id !== courseId));
+    // setCourses(courses.filter((course) => course._id !== courseId));
   };
   const updateCourse = async () => {
     await client.updateCourse(course);
-    setCourses(
-      courses.map((c) => {
-        if (c._id === course._id) {
-          return course;
-        } else {
-          return c;
-        }
-      })
-    );
+    // setCourses(
+    //   courses.map((c) => {
+    //     if (c._id === course._id) {
+    //       return course;
+    //     } else {
+    //       return c;
+    //     }
+    //   })
+    // );
   };
   return (
     <Provider store={store}>
@@ -75,14 +72,14 @@ export default function Kanbas() {
                   element={
                     <ProtectedRoute>
                       <Dashboard
-                        courses={courses}
+                        // courses={courses}
                         course={course}
                         setCourse={setCourse}
                         addNewCourse={addNewCourse}
                         deleteCourse={deleteCourse}
                         updateCourse={updateCourse}
-                        setCourses={setCourses}
-                        fetchCourses={fetchCourses}
+                        // setCourses={setCourses}
+                        // fetchCourses={fetchCourses}
                       />
                     </ProtectedRoute>
                   }
@@ -91,7 +88,7 @@ export default function Kanbas() {
                   path="Courses/:cid/*"
                   element={
                     <ProtectedRoute>
-                      <Courses courses={courses} />
+                      <Courses />
                     </ProtectedRoute>
                   }
                 />

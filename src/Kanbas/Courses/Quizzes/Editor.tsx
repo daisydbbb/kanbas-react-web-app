@@ -69,12 +69,17 @@ export default function Editor() {
       navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}`);
     }
   };
-  const handleSaveAndPublish = () => {
+  const handleSaveAndPublish = async () => {
     const updatedForm = { ...form, published: true };
-    setForm(updatedForm);
-    saveQuiz(updatedForm);
-    alert("Saved and Published!");
-    navigate(`/Kanbas/Courses/${cid}/Quizzes`);
+    if (isNew) {
+      dispatch(addQuiz(updatedForm));
+      await addNewQuiz(updatedForm);
+      navigate(`/Kanbas/Courses/${cid}/Quizzes`);
+    } else {
+      dispatch(updateQuiz(updatedForm));
+      await saveQuiz(updatedForm);
+      navigate(`/Kanbas/Courses/${cid}/Quizzes/${qid}`);
+    }
   };
   return (
     <div>

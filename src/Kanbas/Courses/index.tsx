@@ -16,11 +16,27 @@ import MultipleChoiceEditor from "./Questions/MultipleChoiceEditor";
 import FillInBlankEditor from "./Questions/FillInBlankEditor";
 import Scores from "./Scores";
 import Preview from "./Preview";
+import { useSelector, useDispatch } from "react-redux";
+import * as client from "../Courses/client";
+import { setCourses } from "./reducer";
+import { useEffect } from "react";
 
-export default function Courses({ courses }: { courses: any[] }) {
+export default function Courses() {
   const { cid } = useParams();
-  const course = courses.find((course) => course.number === cid);
+  const { courses } = useSelector((state: any) => state.quizzesReducer);
+  const course = courses.find((course: any) => course.number === cid);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+
+  const fetchCourses = async () => {
+    const courses = await client.fetchAllCourses();
+    dispatch(setCourses(courses));
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
   return (
     <div id="wd-courses">
       <h2 className="text-danger">

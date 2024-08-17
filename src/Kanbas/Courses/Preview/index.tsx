@@ -1,10 +1,9 @@
 import { useParams, useLocation, useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import * as client from "../Questions/client";
-import { setQuestions, calcPoints } from "../Questions/reducer";
+import { setQuestions } from "../Questions/reducer";
 import { FaArrowLeft } from "react-icons/fa";
-import { current } from "@reduxjs/toolkit";
 
 export default function Preview() {
   const { cid, qid } = useParams();
@@ -16,7 +15,6 @@ export default function Preview() {
   const fetchQuestions = async () => {
     const questions = await client.fetchQuestions(cid as string, qid as string);
     dispatch(setQuestions(questions));
-    dispatch(calcPoints());
   };
   useEffect(() => {
     fetchQuestions();
@@ -73,34 +71,61 @@ export default function Preview() {
                   className="card-text d-flex"
                   style={{ marginLeft: 10, fontSize: 18 }}
                 >
-                  {q.description}
+                  {q.description.replace(/<\/?p>/g, "")}
                 </p>
-                <div className="preview-faculty">
-                  {q.options &&
-                  currentUser &&
-                  currentUser.role === "FACULTY" &&
-                  q.type !== "FB" ? (
-                    q.options.map((o: any, index: number) => (
-                      <div key={index + 1} style={{ marginTop: 3 }}>
-                        <hr style={{ margin: "10px 0" }} />
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="option-value"
-                          id={`${q._id}-${index}`}
-                          checked={o === q.faculty_answer}
-                          readOnly
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor={`${q._id}-${index}`}
-                        >
-                          {o}
-                        </label>
 
-                        {o === q.faculty_answer && (
-                          <span style={{ marginLeft: 10 }}>
-                            {q.faculty_answer === q.answer ? (
+                {currentUser && currentUser.role === "STUDENT" && (
+                  <div className="preview-student">
+                    {qid && q.type !== "FB" ? (
+                      <div>
+                        {q.options.map((o: any, index: number) => (
+                          <div key={index + 1} style={{ marginTop: 3 }}>
+                            <hr style={{ margin: "10px 0" }} />
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              id={`${q._id}-${index}`}
+                              checked={currentUser.scores?.[qid]?.[q._id] === o}
+                              readOnly
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor={`${q._id}-${index}`}
+                              style={{ marginLeft: 5 }}
+                            >
+                              {o}
+                            </label>
+                            {o === currentUser.scores?.[qid]?.[q._id] &&
+                              (currentUser.scores?.[qid]?.[q._id] ===
+                              q.answer ? (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "green", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "green" }}>
+                                    Correct{" "}
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "red", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "red" }}>
+                                    Incorrect{" "}
+                                  </span>
+                                </>
+                              ))}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div>
+                        {qid && (
+                          <>
+                            Your Answer: {currentUser.scores?.[qid]?.[q._id]}
+                            {currentUser.scores?.[qid]?.[q._id] in
+                            q.answer_options ? (
                               <>
                                 <FaArrowLeft
                                   style={{ color: "green", marginRight: 5 }}
@@ -115,38 +140,100 @@ export default function Preview() {
                                 <span style={{ color: "red" }}>Incorrect </span>
                               </>
                             )}
-                          </span>
+                            <br />
+                            Correct Answers:{" "}
+                            <ul>
+                              {q.answer_options.map((o: any) => (
+                                <li>{o}</li>
+                              ))}
+                            </ul>
+                          </>
                         )}
                       </div>
-                    ))
-                  ) : (
-                    <div style={{ background: "none" }}>
-                      Your Answer: {q.faculty_answer}{" "}
-                      {q.answer_options.includes(q.faculty_answer) ? (
-                        <>
-                          <FaArrowLeft
-                            style={{ color: "green", marginRight: 5 }}
-                          />
-                          <span style={{ color: "green" }}>Correct </span>
-                        </>
-                      ) : (
-                        <>
-                          <FaArrowLeft
-                            style={{ color: "red", marginRight: 5 }}
-                          />
-                          <span style={{ color: "red" }}>Incorrect </span>
-                        </>
-                      )}
-                      <br />
-                      Correct Answers:
-                      <ul>
-                        {q.answer_options.map((a: any) => (
-                          <li> {a} </li>
+                    )}
+                  </div>
+                )}
+
+                {currentUser && currentUser.role === "FACULTY" && (
+                  <div className="preview-faculty">
+                    {qid && q.type !== "FB" ? (
+                      <div>
+                        {q.options.map((o: any, index: number) => (
+                          <div key={index + 1} style={{ marginTop: 3 }}>
+                            <hr style={{ margin: "10px 0" }} />
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              id={`${q._id}-${index}`}
+                              checked={currentUser.scores?.[qid]?.[q._id] === o}
+                              readOnly
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor={`${q._id}-${index}`}
+                              style={{ marginLeft: 5 }}
+                            >
+                              {o}
+                            </label>
+                            {o === currentUser.scores?.[qid]?.[q._id] &&
+                              (currentUser.scores?.[qid]?.[q._id] ===
+                              q.answer ? (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "green", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "green" }}>
+                                    Correct{" "}
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "red", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "red" }}>
+                                    Incorrect{" "}
+                                  </span>
+                                </>
+                              ))}
+                          </div>
                         ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
+                      </div>
+                    ) : (
+                      <div>
+                        {qid && (
+                          <>
+                            Your Answer: {currentUser.scores?.[qid]?.[q._id]}
+                            {q.answer_options.includes(
+                              currentUser.scores?.[qid]?.[q._id]
+                            ) ? (
+                              <>
+                                <FaArrowLeft
+                                  style={{ color: "green", marginRight: 5 }}
+                                />
+                                <span style={{ color: "green" }}>Correct</span>
+                              </>
+                            ) : (
+                              <>
+                                <FaArrowLeft
+                                  style={{ color: "red", marginRight: 5 }}
+                                />
+                                <span style={{ color: "red" }}>Incorrect </span>
+                              </>
+                            )}
+                            <br />
+                            Correct Answers:{" "}
+                            <ul>
+                              {q.answer_options.map((o: any) => (
+                                <li>{o}</li>
+                              ))}
+                            </ul>
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ))}
