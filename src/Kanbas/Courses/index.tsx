@@ -23,7 +23,7 @@ import { useEffect } from "react";
 
 export default function Courses() {
   const { cid } = useParams();
-  const { courses } = useSelector((state: any) => state.quizzesReducer);
+  const { courses } = useSelector((state: any) => state.courseReducer);
   const course = courses.find((course: any) => course.number === cid);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ export default function Courses() {
   useEffect(() => {
     fetchCourses();
   }, []);
+  console.log(courses);
 
   return (
     <div id="wd-courses">

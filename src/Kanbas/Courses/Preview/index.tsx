@@ -124,8 +124,9 @@ export default function Preview() {
                         {qid && (
                           <>
                             Your Answer: {currentUser.scores?.[qid]?.[q._id]}
-                            {currentUser.scores?.[qid]?.[q._id] in
-                            q.answer_options ? (
+                            {q.answer_options.includes(
+                              currentUser.scores?.[qid]?.[q._id]
+                            ) ? (
                               <>
                                 <FaArrowLeft
                                   style={{ color: "green", marginRight: 5 }}

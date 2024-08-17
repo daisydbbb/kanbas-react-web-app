@@ -132,8 +132,8 @@ export default function Quizzes() {
                               {quiz.due && `${getDate(quiz.due)} 11:59pm`} |{" "}
                               {currentUser &&
                               currentUser.role === "STUDENT" &&
-                              quiz.score ? (
-                                <b>{quiz.score}/</b>
+                              currentUser.scores?.[quiz._id]?.score ? (
+                                <b>{currentUser.scores?.[quiz._id]?.score}/</b>
                               ) : (
                                 ""
                               )}
