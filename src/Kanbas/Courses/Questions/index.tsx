@@ -61,7 +61,7 @@ export default function Questions() {
           className="btn btn-lg btn-secondary mt-3 me-3"
           onClick={() =>
             navigate(
-              `/Kanbas/Courses/${cid}/Quizzes/${qid}/Questions/TF/new_link`
+              `/Kanbas/Courses/${cid}/Quizzes/${qid}/Questions/MC/new_link`
             )
           }
           style={{ borderRadius: "5px" }}

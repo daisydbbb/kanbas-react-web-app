@@ -43,6 +43,8 @@ export default function Preview() {
                 Faculty View
               </button>
             ))}
+          <br />
+          Last Score: {qid && currentUser.scores?.[qid]?.score}
         </div>
         <ul id="wd-questions-list">
           {questions.map((q: any, index: number) => (
@@ -205,23 +207,28 @@ export default function Preview() {
                         {qid && (
                           <>
                             Your Answer: {currentUser.scores?.[qid]?.[q._id]}
-                            {q.answer_options.includes(
-                              currentUser.scores?.[qid]?.[q._id]
-                            ) ? (
-                              <>
-                                <FaArrowLeft
-                                  style={{ color: "green", marginRight: 5 }}
-                                />
-                                <span style={{ color: "green" }}>Correct</span>
-                              </>
-                            ) : (
-                              <>
-                                <FaArrowLeft
-                                  style={{ color: "red", marginRight: 5 }}
-                                />
-                                <span style={{ color: "red" }}>Incorrect </span>
-                              </>
-                            )}
+                            {currentUser.scores?.[qid]?.[q._id] &&
+                              (q.answer_options.includes(
+                                currentUser.scores?.[qid]?.[q._id]
+                              ) ? (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "green", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "green" }}>
+                                    Correct
+                                  </span>
+                                </>
+                              ) : (
+                                <>
+                                  <FaArrowLeft
+                                    style={{ color: "red", marginRight: 5 }}
+                                  />
+                                  <span style={{ color: "red" }}>
+                                    Incorrect{" "}
+                                  </span>
+                                </>
+                              ))}
                             <br />
                             Correct Answers:{" "}
                             <ul>

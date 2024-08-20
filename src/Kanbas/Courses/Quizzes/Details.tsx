@@ -39,7 +39,7 @@ export default function Details() {
   const { currentUser } = useSelector((state: any) => state.accountReducer);
 
   let usedAttempts = 0;
-  if (currentUser.scores && qid && qid in currentUser.scores) {
+  if (currentUser && currentUser.scores && qid && qid in currentUser.scores) {
     usedAttempts = currentUser.scores[qid]?.usedAttempts || 0;
   }
 
@@ -151,7 +151,9 @@ export default function Details() {
           >
             <b>Require Respondus LockDown Browser</b>
           </div>
-          <div className="col-sm-7">No</div>
+          <div className="col-sm-7">
+            {currQuiz.lockdown_browser ? "Yes" : "No"}
+          </div>
 
           <div
             className="col-sm-5 d-flex justify-content-end mb-2"
@@ -159,7 +161,7 @@ export default function Details() {
           >
             <b>Required to View Quiz Results</b>
           </div>
-          <div className="col-sm-7">No</div>
+          <div className="col-sm-7">{currQuiz.view_quiz ? "Yes" : "No"}</div>
 
           <div className="col-sm-5 d-flex justify-content-end mb-2">
             <b>Webcam Required</b>

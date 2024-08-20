@@ -30,7 +30,6 @@ export default function Profile() {
     await client.update(profile);
     dispatch(setCurrentUser(profile));
     alert("Profile saved!");
-    navigate("/Kanbas/Account/Signin");
   };
 
   return (
@@ -132,15 +131,12 @@ export default function Profile() {
             style={{ marginLeft: 10, marginBottom: 10 }}
           >
             Role:
-            <select
+            <input
               className="wd-role form-control w-25"
               value={profile.role}
-              onChange={(e) => setProfile({ ...profile, role: e.target.value })}
               style={{ marginLeft: 10 }}
-            >
-              <option value="FACULTY">Faculty</option>
-              <option value="STUDENT">Student</option>
-            </select>
+              readOnly
+            />
           </div>
           <hr />
           <button

@@ -16,6 +16,7 @@ export default function AllCourses() {
     number: "",
     image: "/images/reactjs.jpg",
     description: "",
+    creator: currentUser.username,
   }); // for selected course
 
   const [enrolled, setEnrolled] = useState(currentUser.enrolled_courses);
@@ -69,6 +70,7 @@ export default function AllCourses() {
         number: "",
         image: "/images/reactjs.jpg",
         description: "",
+        creator: currentUser.username,
       });
       alert("New course added!");
     } catch (err) {
@@ -93,6 +95,7 @@ export default function AllCourses() {
       number: "",
       image: "/images/reactjs.jpg",
       description: "",
+      creator: currentUser.username,
     });
   };
 
@@ -134,6 +137,7 @@ export default function AllCourses() {
                     number: "",
                     image: "/images/reactjs.jpg",
                     description: "",
+                    creator: currentUser.username,
                   });
                 }}
                 id="wd-update-course-click"
@@ -170,42 +174,87 @@ export default function AllCourses() {
 
       <h1>Choose Courses for Enrollment</h1>
       <div style={{ marginLeft: 10 }}>
-        {courses.map((course: any) => (
-          <div key={course.name} style={{ marginBottom: 5 }}>
-            {enrolledCourseName.includes(course.name) ? (
-              <button
-                className="btn btn-sm btn-primary me-3"
-                onClick={() => handleUnenroll(course)}
-              >
-                Unenroll
-              </button>
-            ) : (
-              <button
-                className="btn btn-sm btn-secondary me-3"
-                onClick={() => handleEnroll(course)}
-              >
-                Enroll
-              </button>
-            )}
-            {course.name}
-            <FaPencil
-              style={{
-                marginLeft: 5,
-                color: "orange",
-              }}
-              onClick={() => {
-                setCourse(course);
-              }}
-            />
-            <FaRegTrashAlt
-              style={{
-                marginLeft: 5,
-                color: "red",
-              }}
-              onClick={() => handleDeleteCourse(course)}
-            />
-          </div>
-        ))}
+        {currentUser &&
+          currentUser.role === "STUDENT" &&
+          courses.map((course: any) => (
+            <div key={course.name} style={{ marginBottom: 5 }}>
+              {enrolledCourseName.includes(course.name) ? (
+                <button
+                  className="btn btn-sm btn-primary me-3"
+                  onClick={() => handleUnenroll(course)}
+                >
+                  Unenroll
+                </button>
+              ) : (
+                <button
+                  className="btn btn-sm btn-secondary me-3"
+                  onClick={() => handleEnroll(course)}
+                >
+                  Enroll
+                </button>
+              )}
+              {course.name}
+              <FacultyRoutes>
+                <FaPencil
+                  style={{
+                    marginLeft: 5,
+                    color: "orange",
+                  }}
+                  onClick={() => {
+                    setCourse(course);
+                  }}
+                />
+                <FaRegTrashAlt
+                  style={{
+                    marginLeft: 5,
+                    color: "red",
+                  }}
+                  onClick={() => handleDeleteCourse(course)}
+                />
+              </FacultyRoutes>
+            </div>
+          ))}
+
+        {currentUser &&
+          currentUser.role === "FACULTY" &&
+          courses
+            .filter((course: any) => course.creator === currentUser.username)
+            .map((course: any) => (
+              <div key={course.name} style={{ marginBottom: 5 }}>
+                {enrolledCourseName.includes(course.name) ? (
+                  <button
+                    className="btn btn-sm btn-primary me-3"
+                    onClick={() => handleUnenroll(course)}
+                  >
+                    Unenroll
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-sm btn-secondary me-3"
+                    onClick={() => handleEnroll(course)}
+                  >
+                    Enroll
+                  </button>
+                )}
+                {course.name}
+                <FaPencil
+                  style={{
+                    marginLeft: 5,
+                    color: "orange",
+                  }}
+                  onClick={() => {
+                    setCourse(course);
+                  }}
+                />
+                <FaRegTrashAlt
+                  style={{
+                    marginLeft: 5,
+                    color: "red",
+                  }}
+                  onClick={() => handleDeleteCourse(course)}
+                />
+              </div>
+            ))}
       </div>
       <br />
       <button className="btn btn-md btn-secondary me-2" onClick={handleCancel}>

@@ -42,6 +42,9 @@ export default function Editor() {
       one_question: true,
       webcam: false,
       lock_after_answer: false,
+      access_code: "",
+      lockdown_browser: false,
+      view_quiz: false,
     };
   }
 
@@ -268,6 +271,62 @@ export default function Editor() {
                   times
                 </div>
               )}
+              <div id="additional-requirements">
+                Access code:
+                <input
+                  value={form.access_code}
+                  onChange={(e) =>
+                    setForm({ ...form, access_code: e.target.value })
+                  }
+                  style={{ marginTop: 10, marginLeft: 5 }}
+                />{" "}
+                <br />
+                <input
+                  type="checkbox"
+                  defaultChecked={form.one_question}
+                  onChange={(e) =>
+                    setForm({ ...form, one_question: e.target.checked })
+                  }
+                  style={{ marginTop: 10 }}
+                />{" "}
+                One Question At a Time <br />
+                <input
+                  type="checkbox"
+                  defaultChecked={form.lockdown_browser}
+                  onChange={(e) =>
+                    setForm({ ...form, lockdown_browser: e.target.checked })
+                  }
+                  style={{ marginTop: 10 }}
+                />{" "}
+                Required Respondus LockDown Browser <br />
+                <input
+                  type="checkbox"
+                  defaultChecked={form.view_quiz}
+                  onChange={(e) =>
+                    setForm({ ...form, view_quiz: e.target.checked })
+                  }
+                  style={{ marginTop: 10 }}
+                />{" "}
+                Required to View Quiz Results <br />
+                <input
+                  type="checkbox"
+                  defaultChecked={form.webcam}
+                  onChange={(e) =>
+                    setForm({ ...form, webcam: e.target.checked })
+                  }
+                  style={{ marginTop: 10 }}
+                />{" "}
+                Webcam <br />
+                <input
+                  type="checkbox"
+                  defaultChecked={form.lock_after_answer}
+                  onChange={(e) =>
+                    setForm({ ...form, lock_after_answer: e.target.checked })
+                  }
+                  style={{ marginTop: 10 }}
+                />{" "}
+                Lock Question After Answering <br />
+              </div>
             </div>
           </div>
           <br />
